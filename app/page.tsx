@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ServiceProcess } from "@/components/service-process";
 import { site } from "@/lib/site";
 
 const title = `Heating, Heat Pumps & Plumbing in Šiauliai | ${site.name}`;
@@ -68,29 +69,6 @@ const reasons = [
     title: "Practical service scope",
     description:
       "Heating installation, repair and maintenance alongside heat pumps and general plumbing.",
-  },
-];
-
-const steps = [
-  {
-    title: "Contact",
-    description:
-      "Tell us where the property is and what heating or plumbing work you need.",
-  },
-  {
-    title: "Discuss the job",
-    description:
-      "Talk through the problem or planned work and the details needed to assess it.",
-  },
-  {
-    title: "Site visit / assessment",
-    description:
-      "Arrange a visit where needed to look at the property and understand the work involved.",
-  },
-  {
-    title: "Quotation / next steps",
-    description:
-      "Review the proposed work and quotation, then discuss how to proceed.",
   },
 ];
 
@@ -217,14 +195,7 @@ export default function HomePage() {
             <p className="eyebrow">How to get started</p>
             <h2 id="process-heading">From your first enquiry to the next steps.</h2>
           </header>
-          <ol className="process-grid">
-            {steps.map((step) => (
-              <li key={step.title}>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </li>
-            ))}
-          </ol>
+          <ServiceProcess />
         </div>
       </section>
 

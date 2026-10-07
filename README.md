@@ -23,11 +23,12 @@ If an execution environment blocks Turbopack's local worker ports, the supported
 
 ## Shared foundation
 
-- `app/layout.tsx` supplies the header, main landmark, skip link and footer to every route. The homepage includes services, heat pumps, trust factors, process, coverage and enquiry sections; other routes currently contain minimal shells.
+- `app/layout.tsx` supplies the header, main landmark, skip link and footer to every route. The homepage includes services, heat pumps, trust factors, process, coverage and enquiry sections. `/heating` provides the first complete service page; the remaining routes currently contain minimal shells.
 - `lib/site.ts` keeps navigation and brief-derived project information together so the header and footer stay consistent.
 - `components/site-header.tsx` is the only custom Client Component. Its mobile menu uses an in-flow disclosure to retain normal keyboard navigation. Escape closes the menu and returns focus to its button; choosing a navigation link closes it. The pathname identifies the current page.
 - The footer and page shell remain Server Components to minimise browser JavaScript.
 - The homepage is also a Server Component. Its service, trust and process lists are rendered from local content arrays, with no additional browser JavaScript or image dependencies. Enquiry links lead to the contact route; that page and its form remain to be developed.
+- `components/service-page.tsx` supplies a service hero, labelled section and closing enquiry CTA. Service-specific copy and lists stay in the route so later service pages can use the same structure without a page configuration system. `components/service-process.tsx` keeps the four enquiry steps shared by the homepage and service pages in one place. All remain Server Components.
 - `app/globals.css` exposes colours and system typography through Tailwind theme variables, with shared spacing, page width, buttons, links and focus styles. System fonts avoid an external font dependency.
 
 Read [the project instructions](AGENTS.md) and [the project brief](docs/PROJECT_BRIEF.md) before making substantial changes.
