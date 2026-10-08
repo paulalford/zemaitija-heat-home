@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 
 const title = "Heating Installation & Repairs in Šiauliai";
 const description =
-  "Residential heating installation, repairs, maintenance and upgrades around Šiauliai and Samogitia, with an approximately 50 km service radius. A portfolio case study.";
+  "Residential heating installation, repairs, maintenance and upgrades around Šiauliai and Žemaitija, with an approximately 50 km service radius. A portfolio case study.";
 
 export const metadata: Metadata = {
   title,
@@ -116,9 +116,9 @@ export default function HeatingPage() {
   return (
     <>
       <ServiceHero
-        eyebrow="Residential heating · Šiauliai & Samogitia"
+        eyebrow="Residential heating · Šiauliai & Žemaitija"
         title="Heating installation, repairs and care for your home."
-        description="From a heating problem to a planned replacement, get help with residential heating in Šiauliai and the wider Samogitia region. Discuss your existing system, your plans and the next steps."
+        description="From a heating problem to a planned replacement, get help with residential heating in Šiauliai and the wider Žemaitija region. Discuss your existing system, your plans and the next steps."
         contactLabel="Request a heating quotation"
       />
 
@@ -167,7 +167,7 @@ export default function HeatingPage() {
         id="heating-service-area"
         eyebrow="Our service area"
         title="Heating support around Šiauliai."
-        description="We serve residential properties in Šiauliai and the wider Samogitia region, with an approximately 50 km service radius."
+        description="We serve residential properties in Šiauliai and the wider Žemaitija region, with an approximately 50 km service radius."
         split
       >
         <div className="service-note">

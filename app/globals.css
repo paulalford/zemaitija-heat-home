@@ -538,6 +538,62 @@
     color: var(--color-brand);
   }
 
+  .heat-pump-considerations p {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+  }
+
+  .heat-pump-considerations li + li {
+    margin-top: var(--space-6);
+  }
+
+  .heat-pump-factors {
+    margin-top: var(--space-8);
+  }
+
+  .heat-pump-factors > div {
+    display: grid;
+    gap: var(--space-3);
+    border-top: 1px solid var(--color-line);
+    padding-block: var(--space-6);
+  }
+
+  .heat-pump-factors dt {
+    color: var(--color-brand);
+    font-weight: 600;
+  }
+
+  .heat-pump-factors dd {
+    max-width: 44rem;
+    color: var(--color-muted);
+  }
+
+  .heat-pump-assessment-grid {
+    display: grid;
+    gap: var(--space-12);
+    margin-top: var(--space-8);
+  }
+
+  .heat-pump-installation-heading {
+    margin-top: var(--space-8);
+  }
+
+  /* Keep the five assessment steps in reading order beside the introduction. */
+  .heat-pump-process .process-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+    margin-top: 0;
+  }
+
+  .heat-pump-process .process-grid li {
+    border-top: 1px solid var(--color-line);
+    padding-top: var(--space-6);
+  }
+
+  .heat-pump-process .process-grid p {
+    margin-top: var(--space-3);
+  }
+
   @media (min-width: 40rem) {
     .home-actions .button,
     .service-actions .button {
@@ -549,6 +605,11 @@
     .reasons-grid,
     .process-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .heat-pump-factors > div {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-8);
     }
   }
 
@@ -580,6 +641,11 @@
     .service-offerings-grid,
     .related-services-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .heat-pump-assessment-grid {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: var(--space-16);
     }
   }
 

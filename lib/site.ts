@@ -1,8 +1,8 @@
 export const site = {
   name: "Žemaitija Heat & Home",
   description:
-    "Residential heating, heat pump installation and plumbing around Šiauliai and the wider Samogitia region of Lithuania. A fictional business developed as a portfolio case study.",
-  serviceArea: "Šiauliai and the wider Samogitia region of Lithuania",
+    "Residential heating, heat pump installation and plumbing around Šiauliai and the wider Žemaitija region of Lithuania. A fictional business developed as a portfolio case study.",
+  serviceArea: "Šiauliai and the wider Žemaitija region of Lithuania",
   disclosure:
     "An independently developed commercial-style portfolio case study based on a realistic small-business brief.",
 };

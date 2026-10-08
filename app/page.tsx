@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 const title = `Heating, Heat Pumps & Plumbing in Šiauliai | ${site.name}`;
 const description =
-  "Residential heating, heat pump installation, plumbing and emergency repairs around Šiauliai and Samogitia, with an approximately 50 km service radius. A portfolio case study.";
+  "Residential heating, heat pump installation, plumbing and emergency repairs around Šiauliai and Žemaitija, with an approximately 50 km service radius. A portfolio case study.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -58,7 +58,7 @@ const reasons = [
   {
     title: "Clear local coverage",
     description:
-      "Based around Šiauliai and the wider Samogitia region, with an approximately 50 km service radius.",
+      "Based around Šiauliai and the wider Žemaitija region, with an approximately 50 km service radius.",
   },
   {
     title: "Straightforward communication",
@@ -96,7 +96,7 @@ export default function HomePage() {
 
           <div className="hero-area">
             <p className="eyebrow">Our service area</p>
-            <p className="hero-area-title">Šiauliai &amp; Samogitia</p>
+            <p className="hero-area-title">Šiauliai &amp; Žemaitija</p>
             <p>
               Residential call-outs in Šiauliai and the surrounding towns and
               villages, with an approximately 50 km service radius.
@@ -206,7 +206,7 @@ export default function HomePage() {
         <div className="container home-split">
           <header className="home-section-heading">
             <p className="eyebrow">Working in the region</p>
-            <h2 id="service-area-heading">Šiauliai and the wider Samogitia region.</h2>
+            <h2 id="service-area-heading">Šiauliai and the wider Žemaitija region.</h2>
             <p>
               Residential heating and plumbing for Šiauliai and surrounding
               towns and villages, with an approximately 50 km service radius.

@@ -7,7 +7,7 @@ This is a fictional company created for portfolio purposes. The website should b
 
 ## Business
 
-Žemaitija Heat & Home is a small heating and plumbing company serving residential customers around Šiauliai and the wider Samogitia region of Lithuania.
+Žemaitija Heat & Home is a small heating and plumbing company serving residential customers around Šiauliai and the wider Žemaitija region of Lithuania.
 
 The company has six engineers and provides:
 
