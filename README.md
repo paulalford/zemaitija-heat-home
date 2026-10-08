@@ -21,6 +21,19 @@ npm run build
 
 If an execution environment blocks Turbopack's local worker ports, the supported alternative production build is `npm run build -- --webpack`.
 
+## Performance
+
+Production Lighthouse results from 8 October 2026:
+
+| Category | Mobile | Desktop |
+| --- | ---: | ---: |
+| Performance | 99 | 100 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 100 | 100 |
+
+See the [performance record](docs/PERFORMANCE.md) for metrics and audit conditions. Lighthouse scores are laboratory measurements that can vary between runs and do not guarantee real-world performance.
+
 ## Shared foundation
 
 - `app/layout.tsx` supplies the header, main landmark, skip link and footer to every route. The homepage includes services, heat pumps, trust factors, process, coverage and enquiry sections. All required public routes now provide complete page content.
