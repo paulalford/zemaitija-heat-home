@@ -594,6 +594,70 @@
     margin-top: var(--space-3);
   }
 
+  .plumbing-service-groups {
+    display: grid;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+  }
+
+  .plumbing-service-groups > section {
+    border: 1px solid var(--color-line);
+    border-top: 3px solid var(--color-brand);
+    padding: var(--space-6);
+  }
+
+  .plumbing-service-groups > section > p,
+  .plumbing-service-groups li span,
+  .plumbing-planned-list p {
+    color: var(--color-muted);
+  }
+
+  .plumbing-service-groups > section > p {
+    margin-top: var(--space-3);
+  }
+
+  .plumbing-service-groups ul,
+  .plumbing-planned-list {
+    list-style: none;
+  }
+
+  .plumbing-service-groups ul {
+    margin-top: var(--space-6);
+  }
+
+  .plumbing-service-groups li {
+    display: grid;
+    gap: var(--space-2);
+    border-top: 1px solid var(--color-line);
+    padding-block: var(--space-4);
+  }
+
+  .plumbing-service-groups li:last-child {
+    padding-bottom: 0;
+  }
+
+  .plumbing-call-details {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  .plumbing-planned-list {
+    align-self: start;
+  }
+
+  .plumbing-planned-list li {
+    border-top: 1px solid var(--color-line);
+    padding-block: var(--space-6);
+  }
+
+  .plumbing-planned-list li:first-child {
+    padding-top: 0;
+  }
+
+  .plumbing-planned-list p {
+    margin-top: var(--space-3);
+  }
+
   @media (min-width: 40rem) {
     .home-actions .button,
     .service-actions .button {
@@ -610,6 +674,10 @@
     .heat-pump-factors > div {
       grid-template-columns: 1fr 2fr;
       gap: var(--space-8);
+    }
+
+    .plumbing-service-groups {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 

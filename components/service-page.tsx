@@ -6,11 +6,15 @@ export function ServiceHero({
   title,
   description,
   contactLabel,
+  secondaryHref = "/#services",
+  secondaryLabel = "View all services",
 }: Readonly<{
   eyebrow: string;
   title: string;
   description: string;
   contactLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
 }>) {
   return (
     <section className="service-hero" aria-labelledby="service-hero-heading">
@@ -23,8 +27,8 @@ export function ServiceHero({
             <Link href="/contact" className="button">
               {contactLabel}
             </Link>
-            <Link href="/#services" className="button button-secondary">
-              View all services
+            <Link href={secondaryHref} className="button button-secondary">
+              {secondaryLabel}
             </Link>
           </div>
         </div>
