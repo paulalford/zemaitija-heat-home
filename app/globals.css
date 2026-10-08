@@ -923,6 +923,154 @@
     color: var(--color-muted);
   }
 
+  .about-hero,
+  .about-section {
+    padding-block: clamp(var(--space-12), 6vw, 6rem);
+  }
+
+  .about-hero {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .about-hero-grid,
+  .about-editorial-grid,
+  .about-local-grid,
+  .about-services-layout {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  .about-hero-introduction {
+    max-width: 50rem;
+  }
+
+  .about-hero-action {
+    margin-top: var(--space-8);
+  }
+
+  .about-hero-action .button {
+    width: 100%;
+  }
+
+  .about-hero-note {
+    align-self: end;
+    border-block: 1px solid var(--color-line);
+    padding-block: var(--space-8);
+  }
+
+  .about-hero-note h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .about-hero-note p:not(.eyebrow) {
+    margin-top: var(--space-4);
+    color: var(--color-muted);
+    font-size: 1.0625rem;
+  }
+
+  .about-section-surface {
+    border-block: 1px solid var(--color-line);
+    background: var(--color-surface);
+  }
+
+  .about-section-heading {
+    max-width: 44rem;
+  }
+
+  .about-section-heading p:not(.eyebrow) {
+    margin-top: var(--space-6);
+    color: var(--color-muted);
+  }
+
+  .about-section-heading .text-link {
+    margin-top: var(--space-4);
+  }
+
+  .about-audience-list,
+  .about-principles,
+  .about-service-links {
+    list-style: none;
+  }
+
+  .about-audience-list {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .about-audience-list li {
+    border-top: 1px solid var(--color-line);
+    padding-top: var(--space-4);
+  }
+
+  .about-audience-list p,
+  .about-principles p,
+  .about-service-links p {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+  }
+
+  .about-principles {
+    display: grid;
+    gap: var(--space-8);
+    margin-top: var(--space-12);
+    counter-reset: principle;
+  }
+
+  .about-principles li {
+    position: relative;
+    border-top: 1px solid var(--color-line);
+    padding-top: var(--space-12);
+    counter-increment: principle;
+  }
+
+  .about-principles li::before {
+    position: absolute;
+    top: var(--space-4);
+    color: var(--color-accent);
+    content: "0" counter(principle);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .about-process .process-grid {
+    margin-top: var(--space-12);
+  }
+
+  .about-region-callout {
+    align-self: center;
+    border-inline-start: 3px solid var(--color-brand);
+    padding-inline-start: var(--space-8);
+  }
+
+  .about-region-callout strong,
+  .about-region-callout span {
+    display: block;
+  }
+
+  .about-region-callout strong {
+    color: var(--color-brand);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .about-region-callout span {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+  }
+
+  .about-service-links li {
+    display: grid;
+    gap: var(--space-4);
+    border-top: 1px solid var(--color-line);
+    padding-block: var(--space-6);
+  }
+
+  .about-service-links .text-link {
+    justify-self: start;
+  }
+
   @media (min-width: 40rem) {
     .home-actions .button,
     .service-actions .button {
@@ -971,6 +1119,21 @@
 
     .coverage-details {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-hero-action .button {
+      width: auto;
+    }
+
+    .about-audience-list,
+    .about-principles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-service-links li {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-8);
     }
   }
 
@@ -1026,6 +1189,24 @@
       grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.8fr);
       align-items: center;
       gap: var(--space-16);
+    }
+
+    .about-hero-grid {
+      grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.7fr);
+      align-items: end;
+      gap: var(--space-16);
+    }
+
+    .about-editorial-grid,
+    .about-local-grid,
+    .about-services-layout {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
+      gap: var(--space-16);
+    }
+
+    .about-process .process-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--space-6);
     }
   }
 
