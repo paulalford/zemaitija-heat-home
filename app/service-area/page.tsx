@@ -4,6 +4,7 @@ import {
   ServiceSection,
 } from "@/components/service-page";
 import { createPageMetadata } from "@/lib/metadata";
+import { ServiceAreaChecker } from "./service-area-checker";
 
 const title = "Heating & Plumbing Service Area Around Šiauliai";
 const description =
@@ -150,6 +151,16 @@ export default function ServiceAreaPage() {
             </li>
           ))}
         </ul>
+      </ServiceSection>
+
+      <ServiceSection
+        id="location-enquiry-checker"
+        eyebrow="Location enquiry"
+        title="Check your location."
+        description="The normal service area is approximately 50 km around Šiauliai, but every location is checked individually. Enter a town, village, postcode or property location to carry it into an enquiry."
+        split
+      >
+        <ServiceAreaChecker />
       </ServiceSection>
 
       <ServiceSection

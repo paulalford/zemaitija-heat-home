@@ -1171,6 +1171,60 @@
     gap: var(--space-12);
   }
 
+  .service-area-checker {
+    align-self: start;
+    border: 1px solid var(--color-line);
+    border-top: 4px solid var(--color-brand);
+    padding: clamp(var(--space-6), 4vw, var(--space-8));
+    background: var(--color-surface);
+  }
+
+  .service-area-checker-controls {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .service-area-checker-controls input {
+    min-width: 0;
+    margin-top: 0;
+  }
+
+  .service-area-checker-controls .button {
+    width: 100%;
+  }
+
+  .service-area-checker-result {
+    margin-top: var(--space-8);
+    border-top: 1px solid var(--color-line-strong);
+    padding-top: var(--space-6);
+  }
+
+  .service-area-checker-result p {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+  }
+
+  .service-area-checker-result .button {
+    width: 100%;
+    margin-top: var(--space-6);
+  }
+
+  .service-area-checker-form .button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
+  .service-area-checker-attribution {
+    margin-top: var(--space-6);
+    color: var(--color-muted-green);
+    font-size: 0.8125rem;
+  }
+
+  .service-area-checker-attribution a {
+    color: inherit;
+  }
+
   .location-information-list > div {
     border-top: 1px solid var(--color-line);
     padding-block: var(--space-4);
@@ -1628,6 +1682,15 @@
     }
 
     .service-area-hero-action .button {
+      width: auto;
+    }
+
+    .service-area-checker-controls {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .service-area-checker-controls .button,
+    .service-area-checker-result .button {
       width: auto;
     }
 

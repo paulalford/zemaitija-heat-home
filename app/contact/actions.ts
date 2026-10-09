@@ -1,5 +1,7 @@
 "use server";
 
+import { PROPERTY_LOCATION_MAX_LENGTH } from "@/lib/property-location";
+
 type ContactField =
   | "name"
   | "email"
@@ -94,7 +96,7 @@ export async function submitContactEnquiry(
 
   if (!values.propertyLocation.trim()) {
     errors.propertyLocation = "Enter the property location.";
-  } else if (values.propertyLocation.length > 200) {
+  } else if (values.propertyLocation.length > PROPERTY_LOCATION_MAX_LENGTH) {
     errors.propertyLocation =
       "Keep the property location to 200 characters or fewer.";
   }

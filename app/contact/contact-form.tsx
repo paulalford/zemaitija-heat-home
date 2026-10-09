@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
+import { PROPERTY_LOCATION_MAX_LENGTH } from "@/lib/property-location";
 import {
   submitContactEnquiry,
   type ContactFormState,
@@ -26,6 +27,7 @@ const defaultInitialState: ContactFormState = {
 type ContactFormProps = Readonly<{
   initialService?: string;
   initialEnquiryType?: string;
+  initialPropertyLocation?: string;
 }>;
 
 const enquiryTypes = [
@@ -50,11 +52,13 @@ function FieldError({ id, message }: Readonly<{ id: string; message?: string }>)
 export function ContactForm({
   initialService = "",
   initialEnquiryType = "",
+  initialPropertyLocation = "",
 }: ContactFormProps) {
   const initialState: ContactFormState = {
     ...defaultInitialState,
     values: {
       ...defaultInitialState.values,
+      propertyLocation: initialPropertyLocation,
       service: initialService,
       enquiryType: initialEnquiryType,
     },
@@ -169,7 +173,7 @@ export function ContactForm({
               name="propertyLocation"
               type="text"
               autoComplete="street-address"
-              maxLength={200}
+              maxLength={PROPERTY_LOCATION_MAX_LENGTH}
               defaultValue={values.propertyLocation}
               aria-invalid={Boolean(errors.propertyLocation)}
               aria-describedby={`property-location-hint${

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ServiceProcess } from "@/components/service-process";
 import { createPageMetadata } from "@/lib/metadata";
+import { normalizePropertyLocation } from "@/lib/property-location";
 import { ContactForm } from "./contact-form";
 
 const title = "Contact for Heating & Plumbing in Šiauliai";
@@ -68,6 +69,7 @@ export default async function ContactPage({
     query.enquiry,
     enquiryQueryValues,
   );
+  const initialPropertyLocation = normalizePropertyLocation(query.location);
 
   return (
     <>
@@ -107,9 +109,10 @@ export default async function ContactPage({
               </p>
             </header>
             <ContactForm
-              key={`${initialService}:${initialEnquiryType}`}
+              key={`${initialService}:${initialEnquiryType}:${initialPropertyLocation}`}
               initialService={initialService}
               initialEnquiryType={initialEnquiryType}
+              initialPropertyLocation={initialPropertyLocation}
             />
           </div>
 
