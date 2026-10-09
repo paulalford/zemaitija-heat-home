@@ -148,9 +148,6 @@ export function ContactForm() {
               Property location{" "}
               <span className="contact-required">(required)</span>
             </label>
-            <p id="property-location-hint" className="contact-field-hint">
-              Enter the town, village or other useful location information.
-            </p>
             <input
               id="property-location"
               name="propertyLocation"
@@ -164,6 +161,9 @@ export function ContactForm() {
               }`}
               required
             />
+            <p id="property-location-hint" className="contact-field-hint">
+              Enter the town, village or other useful location information.
+            </p>
             <FieldError
               id="property-location-error"
               message={errors.propertyLocation}

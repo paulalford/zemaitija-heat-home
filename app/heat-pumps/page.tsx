@@ -212,23 +212,39 @@ export default function HeatPumpsPage() {
         </dl>
       </ServiceSection>
 
-      <ServiceSection
+      <section
         id="heat-pump-assessment"
-        eyebrow="Before a recommendation"
-        title="What an assessment should cover."
-        description="An assessment brings together practical details about the property and the proposed installation. Share what you know at the enquiry stage; the site visit helps clarify the rest."
-        surface
+        className="service-section service-section-surface"
+        aria-labelledby="heat-pump-assessment-heading"
       >
-        <div className="heat-pump-assessment-grid">
-          <ul className="service-signs-list">
-            {assessmentDetails.map((detail) => (
-              <li key={detail.title}>
-                <strong>{detail.title}:</strong> {detail.description}
-              </li>
-            ))}
-          </ul>
-          <div className="service-note">
-            <h3>Useful information before you enquire</h3>
+        <div className="container heat-pump-assessment-grid">
+          <div className="heat-pump-assessment-main">
+            <header className="service-section-heading">
+              <p className="eyebrow">Before a recommendation</p>
+              <h2 id="heat-pump-assessment-heading">
+                What an assessment should cover.
+              </h2>
+              <p>
+                An assessment brings together practical details about the
+                property and the proposed installation. Share what you know at
+                the enquiry stage; the site visit helps clarify the rest.
+              </p>
+            </header>
+            <ul className="service-signs-list">
+              {assessmentDetails.map((detail) => (
+                <li key={detail.title}>
+                  <strong>{detail.title}:</strong> {detail.description}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <aside
+            className="service-note"
+            aria-labelledby="heat-pump-enquiry-information-heading"
+          >
+            <h3 id="heat-pump-enquiry-information-heading">
+              Useful information before you enquire
+            </h3>
             <p>
               Have your address, approximate floor area, heating equipment
               details and renovation plans ready. Photos of the current system
@@ -245,9 +261,9 @@ export default function HeatPumpsPage() {
               also cover system checks, setup and a handover to explain the
               controls.
             </p>
-          </div>
+          </aside>
         </div>
-      </ServiceSection>
+      </section>
 
       <ServiceSection
         id="heat-pump-process"

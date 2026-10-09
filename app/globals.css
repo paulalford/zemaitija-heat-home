@@ -6,6 +6,7 @@
   --color-surface-muted: #eef1eb;
   --color-ink: #252b27;
   --color-muted: #555f57;
+  --color-muted-green: #5f7568;
   --color-brand: #284d3b;
   --color-brand-hover: #1d3b2c;
   --color-accent: #965631;
@@ -224,8 +225,23 @@
     display: none;
   }
 
+  .menu-toggle {
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+  }
+
+  .menu-toggle-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
   .mobile-navigation {
-    grid-column: 1 / -1;
     border-top: 1px solid var(--color-line);
     padding-block: var(--space-3) var(--space-2);
   }
@@ -457,6 +473,52 @@
     margin-top: var(--space-4);
   }
 
+  .home-hero-media {
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 0.1875rem;
+    background: var(--color-surface);
+  }
+
+  .service-card-media,
+  .home-local-image {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 0.1875rem;
+    background: var(--color-page);
+  }
+
+  .home-hero-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: var(--color-page);
+  }
+
+  .home-hero-image img,
+  .service-card-media img,
+  .home-local-image img {
+    object-fit: cover;
+  }
+
+  .home-hero-image img {
+    object-position: center 44%;
+  }
+
+  .home-hero-media .hero-area {
+    border: 0;
+    border-top: 1px solid var(--color-line);
+    padding: var(--space-6);
+    background: var(--color-surface-muted);
+  }
+
+  .home-hero-media .hero-area > p:not(.eyebrow, .hero-area-title) {
+    max-width: 32rem;
+  }
+
   .text-link {
     gap: var(--space-2);
     display: inline-flex;
@@ -523,6 +585,23 @@
     color: var(--color-brand);
   }
 
+  .service-card-media {
+    aspect-ratio: 16 / 10;
+    margin-bottom: var(--space-2);
+  }
+
+  .service-card-image-heating {
+    object-position: center 48%;
+  }
+
+  .service-card-image-plumbing {
+    object-position: 56% center;
+  }
+
+  .service-card-image-emergency {
+    object-position: 42% center;
+  }
+
   .service-card:focus-within,
   .service-card:has(.text-link:hover) {
     border-color: var(--color-line-strong);
@@ -558,6 +637,20 @@
   .home-note .text-link,
   .service-note .text-link {
     margin-top: var(--space-4);
+  }
+
+  .home-local-context {
+    display: grid;
+    align-self: start;
+    gap: var(--space-6);
+  }
+
+  .home-local-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .home-local-image img {
+    object-position: center 55%;
   }
 
   .reasons-grid li {
@@ -676,15 +769,26 @@
 
   .heat-pump-assessment-grid {
     display: grid;
+    align-items: start;
     gap: var(--space-12);
+  }
+
+  .heat-pump-assessment-main > .service-signs-list {
     margin-top: var(--space-8);
+  }
+
+  .heat-pump-assessment-grid > .service-note {
+    border-top: 3px solid var(--color-brand);
+    border-inline-start: 0;
+    padding-top: var(--space-8);
+    padding-inline-start: 0;
   }
 
   .heat-pump-installation-heading {
     margin-top: var(--space-8);
   }
 
-  /* Keep the five assessment steps in reading order beside the introduction. */
+  /* Keep the heat pump steps in reading order beside the introduction. */
   .heat-pump-process .process-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-6);
@@ -692,12 +796,28 @@
   }
 
   .heat-pump-process .process-grid li {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-3);
     border-top: 1px solid var(--color-line);
     padding-top: var(--space-6);
   }
 
+  .heat-pump-process .process-grid li::before {
+    position: static;
+    grid-row: 1 / span 2;
+    align-self: start;
+    padding-top: 0.2rem;
+  }
+
+  .heat-pump-process .process-grid h3,
   .heat-pump-process .process-grid p {
-    margin-top: var(--space-3);
+    grid-column: 2;
+  }
+
+  .heat-pump-process .process-grid p {
+    margin-top: 0;
   }
 
   .plumbing-service-groups {
@@ -757,10 +877,6 @@
     padding-block: var(--space-6);
   }
 
-  .plumbing-planned-list li:first-child {
-    padding-top: 0;
-  }
-
   .plumbing-planned-list p {
     margin-top: var(--space-3);
   }
@@ -780,6 +896,26 @@
 
   .emergency-hero-introduction {
     max-width: 48rem;
+  }
+
+  .emergency-hero-support {
+    display: grid;
+    align-self: start;
+    gap: var(--space-6);
+  }
+
+  .emergency-hero-media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--color-line);
+    border-radius: 0.1875rem;
+    background: var(--color-page);
+  }
+
+  .emergency-hero-media img {
+    object-fit: cover;
+    object-position: center;
   }
 
   .emergency-hero-action {
@@ -1038,10 +1174,6 @@
   .location-information-list > div {
     border-top: 1px solid var(--color-line);
     padding-block: var(--space-4);
-  }
-
-  .location-information-list > div:first-child {
-    padding-top: 0;
   }
 
   .location-information-list dt {
@@ -1331,7 +1463,7 @@
 
   .contact-field-hint {
     margin-top: var(--space-2);
-    color: var(--color-muted);
+    color: var(--color-muted-green);
     font-size: 0.875rem;
   }
 
@@ -1454,6 +1586,10 @@
       margin-top: 0;
     }
 
+    .mobile-navigation .navigation-list > li:last-child {
+      grid-column: 1 / -1;
+    }
+
     .home-actions .button,
     .service-actions .button {
       width: auto;
@@ -1484,10 +1620,6 @@
     .emergency-information-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: var(--space-8);
-    }
-
-    .emergency-problem-grid li:first-child {
-      grid-column: 1 / -1;
     }
 
     .emergency-planned-services {
@@ -1526,6 +1658,14 @@
     .contact-submit {
       width: auto;
     }
+
+    .service-card-text-only {
+      justify-content: center;
+    }
+
+    .service-card-text-only .text-link {
+      margin-top: var(--space-4);
+    }
   }
 
   @media (min-width: 64rem) {
@@ -1534,9 +1674,16 @@
     }
 
     .hero-grid {
-      grid-template-columns: 1.8fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(28rem, 1fr);
       align-items: start;
-      gap: var(--space-16);
+      gap: clamp(var(--space-12), 5vw, 5rem);
+    }
+
+    .home-hero-media .hero-area {
+      border: 0;
+      border-top: 1px solid var(--color-line);
+      padding: var(--space-6);
+      background: var(--color-surface-muted);
     }
 
     .home-actions .button-secondary {
@@ -1563,6 +1710,10 @@
       padding-inline-start: var(--space-8);
     }
 
+    .home-local-image {
+      aspect-ratio: 2 / 1;
+    }
+
     .home-split,
     .service-split {
       grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -1584,21 +1735,36 @@
     }
 
     .heat-pump-assessment-grid {
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
       gap: var(--space-16);
+    }
+
+    .heat-pump-assessment-grid > .service-note {
+      align-self: stretch;
+      border-top: 0;
+      border-inline-start: 3px solid var(--color-brand);
+      padding-top: 0;
+      padding-inline-start: clamp(var(--space-4), 3vw, var(--space-8));
     }
 
     .emergency-hero-grid {
       grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 0.8fr);
-      align-items: center;
+      align-items: start;
       gap: var(--space-16);
     }
 
     .emergency-safety-grid,
     .emergency-final-cta-grid {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-      align-items: center;
       gap: var(--space-16);
+    }
+
+    .emergency-safety-grid {
+      align-items: start;
+    }
+
+    .emergency-final-cta-grid {
+      align-items: center;
     }
 
     .service-area-hero-grid {

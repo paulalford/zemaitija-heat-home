@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ServiceSection } from "@/components/service-page";
 import { ServiceProcess } from "@/components/service-process";
@@ -133,18 +134,30 @@ export default function EmergencyRepairsPage() {
             </div>
           </div>
 
-          <aside className="emergency-hero-note" aria-labelledby="before-contact-heading">
-            <h2 id="before-contact-heading">Before you contact us</h2>
-            <p>
-              Have your location, a brief description of the problem and your
-              contact details ready. Say clearly if water is actively leaking
-              or the heating has stopped completely.
-            </p>
-            <p>
-              Normal coverage is approximately 50 km around Šiauliai, across
-              the wider Žemaitija region.
-            </p>
-          </aside>
+          <div className="emergency-hero-support">
+            <div className="emergency-hero-media">
+              <Image
+                src="/images/emergency-repair-heating-system.png"
+                alt="Technician repairing a residential heating system"
+                fill
+                loading="eager"
+                sizes="(min-width: 1280px) 22rem, (min-width: 1024px) 30vw, calc(100vw - 2rem)"
+              />
+            </div>
+
+            <aside className="emergency-hero-note" aria-labelledby="before-contact-heading">
+              <h2 id="before-contact-heading">Before you contact us</h2>
+              <p>
+                Have your location, a brief description of the problem and your
+                contact details ready. Say clearly if water is actively leaking
+                or the heating has stopped completely.
+              </p>
+              <p>
+                Normal coverage is approximately 50 km around Šiauliai, across
+                the wider Žemaitija region.
+              </p>
+            </aside>
+          </div>
         </div>
       </section>
 

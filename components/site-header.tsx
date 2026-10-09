@@ -8,13 +8,19 @@ import { navigationLinks, site } from "@/lib/site";
 function NavigationLinks({
   pathname,
   onNavigate,
+  showHome = true,
 }: {
   pathname: string;
   onNavigate?: () => void;
+  showHome?: boolean;
 }) {
+  const links = showHome
+    ? navigationLinks
+    : navigationLinks.filter(({ href }) => href !== "/");
+
   return (
     <ul className="navigation-list">
-      {navigationLinks.map(({ href, label }) => (
+      {links.map(({ href, label }) => (
         <li key={href}>
           <Link
             href={href}
@@ -59,30 +65,53 @@ export function SiteHeader() {
         <button
           ref={menuButton}
           type="button"
-          className="menu-toggle button button-secondary"
+          className="menu-toggle button"
+          aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
         >
-          {isMenuOpen ? "Close menu" : "Menu"}
+          <svg
+            className="menu-toggle-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            {isMenuOpen ? (
+              <>
+                <path d="M5 5 19 19" />
+                <path d="M19 5 5 19" />
+              </>
+            ) : (
+              <>
+                <path d="M4 6H20" />
+                <path d="M4 12H20" />
+                <path d="M4 18H20" />
+              </>
+            )}
+          </svg>
+          <span>{isMenuOpen ? "Close" : "Menu"}</span>
         </button>
 
         <nav className="desktop-navigation" aria-label="Main navigation">
           <NavigationLinks pathname={pathname} />
         </nav>
+      </div>
 
-        <nav
-          id="mobile-navigation"
-          className="mobile-navigation"
-          aria-label="Main navigation"
-          hidden={!isMenuOpen}
-        >
+      <nav
+        id="mobile-navigation"
+        className="mobile-navigation"
+        aria-label="Main navigation"
+        hidden={!isMenuOpen}
+      >
+        <div className="container">
           <NavigationLinks
             pathname={pathname}
             onNavigate={() => setIsMenuOpen(false)}
+            showHome={false}
           />
-        </nav>
-      </div>
+        </div>
+      </nav>
     </header>
   );
 }
