@@ -120,6 +120,7 @@ export default function HeatingPage() {
         title="Heating installation, repairs and care for your home."
         description="From a heating problem to a planned replacement, get help with residential heating in Šiauliai and the wider Žemaitija region. Discuss your existing system, your plans and the next steps."
         contactLabel="Request a heating quotation"
+        contactHref="/contact?service=heating"
       />
 
       <ServiceSection
@@ -205,6 +206,7 @@ export default function HeatingPage() {
         title="Let’s talk about your heating."
         description="Tell us where your home is, what heating problem you have or what you would like to upgrade. Request a quotation or discuss a site visit and the next steps."
         contactLabel="Discuss your heating job"
+        contactHref="/contact?service=heating"
       />
     </>
   );

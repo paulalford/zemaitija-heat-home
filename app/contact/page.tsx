@@ -8,6 +8,29 @@ const title = "Contact for Heating & Plumbing in Šiauliai";
 const description =
   "Send a residential heating, heat pump, plumbing or emergency repair enquiry for a property around Šiauliai and the wider Žemaitija region. A portfolio case study.";
 
+const serviceQueryValues = new Map([
+  ["heating", "heating"],
+  ["heat-pumps", "heat-pumps"],
+  ["plumbing", "plumbing"],
+  ["emergency-repairs", "emergency-repairs"],
+]);
+
+const enquiryQueryValues = new Map([
+  ["planned", "planned-work"],
+  ["repair", "repair"],
+  ["urgent", "urgent-problem"],
+  ["not-sure", "not-sure"],
+]);
+
+type ContactSearchParams = Record<string, string | string[] | undefined>;
+
+function getInitialValue(
+  value: string | string[] | undefined,
+  supportedValues: ReadonlyMap<string, string>,
+) {
+  return typeof value === "string" ? (supportedValues.get(value) ?? "") : "";
+}
+
 export const metadata: Metadata = {
   title,
   description,
@@ -42,7 +65,16 @@ const enquiryProcess = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: Readonly<{ searchParams: Promise<ContactSearchParams> }>) {
+  const query = await searchParams;
+  const initialService = getInitialValue(query.service, serviceQueryValues);
+  const initialEnquiryType = getInitialValue(
+    query.enquiry,
+    enquiryQueryValues,
+  );
+
   return (
     <>
       <section className="contact-hero" aria-labelledby="contact-hero-heading">
@@ -80,7 +112,11 @@ export default function ContactPage() {
                 the enquiry but does not send it to an email service.
               </p>
             </header>
-            <ContactForm />
+            <ContactForm
+              key={`${initialService}:${initialEnquiryType}`}
+              initialService={initialService}
+              initialEnquiryType={initialEnquiryType}
+            />
           </div>
 
           <aside className="contact-guidance" aria-label="Enquiry guidance">

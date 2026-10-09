@@ -168,6 +168,7 @@ export default function PlumbingPage() {
         title="Practical plumbing help for your home."
         description="From a leaking tap to plumbing changes for a renovation, discuss domestic plumbing work in Šiauliai and the wider Žemaitija region."
         contactLabel="Discuss your plumbing job"
+        contactHref="/contact?service=plumbing"
         secondaryHref="/emergency-repairs"
         secondaryLabel="Emergency repair information"
       />
@@ -296,6 +297,7 @@ export default function PlumbingPage() {
         title="What plumbing work does your home need?"
         description="Tell us where the property is, what needs repairing or what you plan to change. We can discuss the job, whether an assessment is needed and the next steps."
         contactLabel="Describe your plumbing job"
+        contactHref="/contact?service=plumbing"
       />
     </>
   );

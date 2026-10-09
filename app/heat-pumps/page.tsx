@@ -176,6 +176,7 @@ export default function HeatPumpsPage() {
         title="Heat pump installation starts with understanding your home."
         description="Considering a change to your heating? Explore whether a heat pump may suit your home in Šiauliai or the wider Žemaitija region, and discuss an assessment before deciding."
         contactLabel="Discuss a heat pump for your home"
+        contactHref="/contact?service=heat-pumps&enquiry=planned"
       />
 
       <ServiceSection
@@ -319,6 +320,7 @@ export default function HeatPumpsPage() {
         title="Could a heat pump suit your home?"
         description="Tell us about your property, existing heating and plans. Start a discussion about suitability, what an assessment should cover and the next steps for your home."
         contactLabel="Discuss heat pump suitability"
+        contactHref="/contact?service=heat-pumps&enquiry=planned"
       />
     </>
   );

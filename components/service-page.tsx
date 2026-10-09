@@ -6,6 +6,7 @@ export function ServiceHero({
   title,
   description,
   contactLabel,
+  contactHref = "/contact",
   secondaryHref = "/#services",
   secondaryLabel = "View all services",
 }: Readonly<{
@@ -13,6 +14,7 @@ export function ServiceHero({
   title: string;
   description: string;
   contactLabel: string;
+  contactHref?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
 }>) {
@@ -24,7 +26,7 @@ export function ServiceHero({
           <h1 id="service-hero-heading">{title}</h1>
           <p className="page-description">{description}</p>
           <div className="service-actions">
-            <Link href="/contact" className="button">
+            <Link href={contactHref} className="button">
               {contactLabel}
             </Link>
             <Link href={secondaryHref} className="button button-secondary">
@@ -78,10 +80,12 @@ export function ServiceCta({
   title,
   description,
   contactLabel,
+  contactHref = "/contact",
 }: Readonly<{
   title: string;
   description: string;
   contactLabel: string;
+  contactHref?: string;
 }>) {
   return (
     <section
@@ -95,7 +99,7 @@ export function ServiceCta({
           <p>{description}</p>
         </header>
         <div className="enquiry-actions">
-          <Link href="/contact" className="button">
+          <Link href={contactHref} className="button">
             {contactLabel}
           </Link>
         </div>

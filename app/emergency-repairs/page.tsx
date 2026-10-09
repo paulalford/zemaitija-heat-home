@@ -128,7 +128,10 @@ export default function EmergencyRepairsPage() {
               region.
             </p>
             <div className="emergency-hero-action">
-              <Link href="/contact" className="button">
+              <Link
+                href="/contact?service=emergency-repairs&enquiry=urgent"
+                className="button"
+              >
                 Contact us about an urgent repair
               </Link>
             </div>
@@ -274,7 +277,10 @@ export default function EmergencyRepairsPage() {
               and contact details so the enquiry can be assessed.
             </p>
           </div>
-          <Link href="/contact" className="button">
+          <Link
+            href="/contact?service=emergency-repairs&enquiry=urgent"
+            className="button"
+          >
             Send an urgent repair enquiry
           </Link>
         </div>

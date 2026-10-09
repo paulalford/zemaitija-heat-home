@@ -6,7 +6,7 @@ import {
   type ContactFormState,
 } from "./actions";
 
-const initialState: ContactFormState = {
+const defaultInitialState: ContactFormState = {
   status: "idle",
   message: "",
   errors: {},
@@ -22,6 +22,11 @@ const initialState: ContactFormState = {
   },
   revision: 0,
 };
+
+type ContactFormProps = Readonly<{
+  initialService?: string;
+  initialEnquiryType?: string;
+}>;
 
 const enquiryTypes = [
   { value: "planned-work", label: "Planned work" },
@@ -42,7 +47,18 @@ function FieldError({ id, message }: Readonly<{ id: string; message?: string }>)
   );
 }
 
-export function ContactForm() {
+export function ContactForm({
+  initialService = "",
+  initialEnquiryType = "",
+}: ContactFormProps) {
+  const initialState: ContactFormState = {
+    ...defaultInitialState,
+    values: {
+      ...defaultInitialState.values,
+      service: initialService,
+      enquiryType: initialEnquiryType,
+    },
+  };
   const [state, formAction, pending] = useActionState(
     submitContactEnquiry,
     initialState,
