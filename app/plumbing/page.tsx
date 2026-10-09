@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ServiceCta,
@@ -6,22 +5,17 @@ import {
   ServiceSection,
 } from "@/components/service-page";
 import { ServiceProcess } from "@/components/service-process";
-import { site } from "@/lib/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 const title = "Residential Plumbing Services in Šiauliai";
 const description =
-  "Domestic plumbing repairs and planned plumbing work around Šiauliai and Žemaitija, with an approximately 50 km service radius. A portfolio case study.";
+  "Explore domestic plumbing repairs and planned plumbing work for homes around Šiauliai and the wider Žemaitija region. A portfolio case study.";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title,
   description,
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: `${title} | ${site.name}`,
-    description,
-  },
-};
+  path: "/plumbing",
+});
 
 const plumbingServiceGroups = [
   {

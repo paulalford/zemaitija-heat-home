@@ -1,23 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ServiceProcess } from "@/components/service-process";
-import { site } from "@/lib/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-const title = `Heating, Heat Pumps & Plumbing in Šiauliai | ${site.name}`;
+const title = "Heating, Heat Pumps & Plumbing in Šiauliai";
 const description =
-  "Residential heating, heat pump installation, plumbing and emergency repairs around Šiauliai and Žemaitija, with an approximately 50 km service radius. A portfolio case study.";
+  "Residential heating, heat pump installation, plumbing and emergency repair services around Šiauliai and the wider Žemaitija region. A portfolio case study.";
 
-export const metadata: Metadata = {
-  title: { absolute: title },
+export const metadata = createPageMetadata({
+  title,
   description,
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title,
-    description,
-  },
-};
+  path: "/",
+});
 
 type HomeService = {
   title: string;

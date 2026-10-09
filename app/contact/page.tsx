@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ServiceProcess } from "@/components/service-process";
-import { site } from "@/lib/site";
+import { createPageMetadata } from "@/lib/metadata";
 import { ContactForm } from "./contact-form";
 
 const title = "Contact for Heating & Plumbing in Šiauliai";
 const description =
-  "Send a residential heating, heat pump, plumbing or emergency repair enquiry for a property around Šiauliai and the wider Žemaitija region. A portfolio case study.";
+  "Send a heating, heat pump, plumbing or emergency repair enquiry for a property around Šiauliai and the wider Žemaitija region. A portfolio case study.";
 
 const serviceQueryValues = new Map([
   ["heating", "heating"],
@@ -31,16 +30,11 @@ function getInitialValue(
   return typeof value === "string" ? (supportedValues.get(value) ?? "") : "";
 }
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title,
   description,
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: `${title} | ${site.name}`,
-    description,
-  },
-};
+  path: "/contact",
+});
 
 const enquiryProcess = [
   {

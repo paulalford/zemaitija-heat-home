@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ServiceCta,
@@ -6,22 +5,17 @@ import {
   ServiceSection,
 } from "@/components/service-page";
 import { ServiceProcess } from "@/components/service-process";
-import { site } from "@/lib/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 const title = "Heat Pump Installation in Šiauliai";
 const description =
-  "Explore heat pump suitability, assessment and installation for homes around Šiauliai and Žemaitija, within an approximately 50 km radius. A portfolio case study.";
+  "Explore heat pump suitability, assessment and installation for homes around Šiauliai and the wider Žemaitija region. A portfolio case study.";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title,
   description,
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: `${title} | ${site.name}`,
-    description,
-  },
-};
+  path: "/heat-pumps",
+});
 
 const reasonsToConsider = [
   {

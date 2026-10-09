@@ -1,23 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ServiceCta } from "@/components/service-page";
 import { ServiceProcess } from "@/components/service-process";
-import { site } from "@/lib/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 const title = "About Our Heating & Plumbing Service in Šiauliai";
 const description =
-  "Learn about the residential heating, heat pump and plumbing service approach of Žemaitija Heat & Home around Šiauliai and the wider Žemaitija region. A portfolio case study.";
+  "Learn about Žemaitija Heat & Home's practical approach to residential heating, heat pumps and plumbing around Šiauliai. A portfolio case study.";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title,
   description,
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: `${title} | ${site.name}`,
-    description,
-  },
-};
+  path: "/about",
+});
 
 const residentialCustomers = [
   {

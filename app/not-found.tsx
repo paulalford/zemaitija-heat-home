@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Page Not Found",
-  description:
-    "The requested page could not be found. Return home or continue to a main Žemaitija Heat & Home page.",
+export const metadata = {
+  ...createPageMetadata({
+    title: "Page Not Found",
+    description:
+      "The requested page could not be found. Return home or continue to a main Žemaitija Heat & Home page.",
+  }),
   robots: {
     index: false,
     follow: true,

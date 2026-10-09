@@ -1,24 +1,18 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ServiceSection } from "@/components/service-page";
 import { ServiceProcess } from "@/components/service-process";
-import { site } from "@/lib/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-const title = "Urgent Heating & Plumbing Repairs in Šiauliai";
+const title = "Emergency Heating & Plumbing Repairs in Šiauliai";
 const description =
-  "Information for urgent domestic heating and plumbing repair enquiries around Šiauliai and Žemaitija, within an approximately 50 km service radius. A portfolio case study.";
+  "Guidance for urgent residential heating and plumbing repair enquiries around Šiauliai and the wider Žemaitija region. A portfolio case study.";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title,
   description,
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: `${title} | ${site.name}`,
-    description,
-  },
-};
+  path: "/emergency-repairs",
+});
 
 const urgentProblems = [
   "An active water leak from accessible pipework or a household fixture.",

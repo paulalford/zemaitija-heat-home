@@ -1,25 +1,19 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ServiceCta,
   ServiceSection,
 } from "@/components/service-page";
-import { site } from "@/lib/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 const title = "Heating & Plumbing Service Area Around Šiauliai";
 const description =
-  "Check coverage for heating, heat pump, plumbing and emergency repair enquiries around Šiauliai and Žemaitija, within an approximately 50 km service radius. A portfolio case study.";
+  "Check coverage for residential heating, heat pump, plumbing and emergency repair enquiries within approximately 50 km of Šiauliai. A portfolio case study.";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title,
   description,
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: `${title} | ${site.name}`,
-    description,
-  },
-};
+  path: "/service-area",
+});
 
 const coverageDetails = [
   {
