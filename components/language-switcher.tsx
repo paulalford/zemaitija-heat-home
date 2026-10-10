@@ -23,7 +23,7 @@ type LanguageSwitcherProps = Readonly<{
 export function LanguageSwitcher({
   currentLocale,
   pathname,
-  searchParams = {},
+  searchParams,
   availableLocales = publishedLocales,
   ariaLabel,
 }: LanguageSwitcherProps) {

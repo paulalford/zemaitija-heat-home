@@ -172,14 +172,11 @@ export const lithuanianEmergencyRepairsContent = {
   },
 } as const satisfies EmergencyRepairsPageContent;
 
-// This metadata remains unreachable until the Lithuanian locale is published.
-// An empty availability list prevents premature hreflang output.
 export const metadata = createLocalizedPageMetadata({
   title: lithuanianEmergencyRepairsContent.metadata.title,
   description: lithuanianEmergencyRepairsContent.metadata.description,
   path: "/emergency-repairs",
   locale: "lt",
-  availableLocales: [],
 });
 
 export default function LithuanianEmergencyRepairsPage() {

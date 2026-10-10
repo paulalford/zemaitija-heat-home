@@ -7,6 +7,7 @@ export const metadata = {
     title: "Puslapis nerastas",
     description:
       "Prašomas puslapis nerastas. Grįžkite į pradžios puslapį arba tęskite naršymą pagrindiniuose Žemaitija Heat & Home puslapiuose.",
+    locale: "lt",
   }),
   robots: {
     index: false,

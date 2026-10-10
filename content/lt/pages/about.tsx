@@ -23,5 +23,5 @@ export const lithuanianAboutContent = {
   finalCta: { title: "Papasakokite apie savo namus ir reikalingus darbus.", description: "Nurodykite objekto vietą, aprašykite šildymo ar santechnikos darbus ir paaiškinkite, kokios pagalbos reikia. Galėsime aptarti užklausą ir tinkamus tolesnius veiksmus.", contactLabel: lithuanianHomeContent.enquiry.contactLink.label },
 } as const satisfies AboutPageContent;
 
-export const metadata = createLocalizedPageMetadata({ ...lithuanianAboutContent.metadata, path: "/about", locale: "lt", availableLocales: [] });
+export const metadata = createLocalizedPageMetadata({ ...lithuanianAboutContent.metadata, path: "/about", locale: "lt" });
 export default function LithuanianAboutPage() { return <AboutPage content={lithuanianAboutContent} locale="lt" />; }

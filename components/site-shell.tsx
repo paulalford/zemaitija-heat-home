@@ -50,6 +50,7 @@ export function SiteShell({
       </a>
       <SiteHeader
         content={headerContent}
+        locale={locale}
         homeHref={getLocalizedPath(locale, "/")}
         navigationLinks={getNavigationLinks(locale)}
       />

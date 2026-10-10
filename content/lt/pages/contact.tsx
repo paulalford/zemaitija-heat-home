@@ -8,7 +8,6 @@ export const metadata = createLocalizedPageMetadata({
   description: lithuanianContactContent.metadata.description,
   path: "/contact",
   locale: "lt",
-  availableLocales: [],
 });
 
 export default function LithuanianContactPage({

@@ -24,5 +24,5 @@ export const lithuanianServiceAreaContent = {
   finalCta: { title: "Ar jūsų objektas patenka į įprastą aptarnavimo teritoriją?", description: "Nurodykite objekto vietą ir reikalingą šildymo, šilumos siurblio, santechnikos ar remonto paslaugą. Galėsime patikrinti aptarnavimo galimybę ir aptarti tinkamus tolesnius veiksmus.", contactLabel: "Patikrinti aptarnavimo galimybę" },
 } as const satisfies ServiceAreaPageContent;
 
-export const metadata = createLocalizedPageMetadata({ ...lithuanianServiceAreaContent.metadata, path: "/service-area", locale: "lt", availableLocales: [] });
+export const metadata = createLocalizedPageMetadata({ ...lithuanianServiceAreaContent.metadata, path: "/service-area", locale: "lt" });
 export default function LithuanianServiceAreaPage() { return <ServiceAreaPage content={lithuanianServiceAreaContent} locale="lt" />; }

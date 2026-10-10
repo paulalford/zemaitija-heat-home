@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { englishHomeContent } from "@/content/en/home";
+import { lithuanianHomeContent } from "@/content/lt/home";
 import {
   defaultLocale,
   getLocalizedPath,
@@ -16,6 +17,19 @@ const socialImage = {
   height: 630,
   alt: englishHomeContent.metadata.socialImageAlt,
 };
+
+const localizedSocialImages = {
+  en: socialImage,
+  lt: {
+    url: new URL("/lt/opengraph-image", site.url).toString(),
+    width: 1200,
+    height: 630,
+    alt: lithuanianHomeContent.metadata.socialImageAlt,
+  },
+} as const satisfies Record<
+  Locale,
+  { url: string; width: number; height: number; alt: string }
+>;
 
 type SocialImage = Readonly<{
   path: string;
@@ -39,12 +53,15 @@ export function createPageMetadata({
   title,
   description,
   path,
+  locale = "en",
 }: Readonly<{
   title: string;
   description: string;
   path?: string;
+  locale?: Locale;
 }>): Metadata {
   const fullTitle = getPageTitle(title);
+  const resolvedSocialImage = localizedSocialImages[locale];
 
   return {
     metadataBase: new URL(site.url),
@@ -54,17 +71,17 @@ export function createPageMetadata({
     openGraph: {
       type: "website",
       siteName: site.name,
-      locale: site.locale,
+      locale: localeConfig[locale].openGraphLocale,
       title: fullTitle,
       description,
       ...(path ? { url: path } : {}),
-      images: [socialImage],
+      images: [resolvedSocialImage],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [socialImage],
+      images: [resolvedSocialImage],
     },
   };
 }
@@ -88,7 +105,7 @@ export function createLocalizedPageMetadata({
   const canonical = getLocalizedPath(locale, path);
   const resolvedSocialImage = localizedSocialImage
     ? createSocialImage(localizedSocialImage)
-    : socialImage;
+    : localizedSocialImages[locale];
   const languages = Object.fromEntries(
     availableLocales.map((availableLocale) => [
       localeConfig[availableLocale].htmlLanguage,

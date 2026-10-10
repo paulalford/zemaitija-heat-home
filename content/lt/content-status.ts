@@ -1,24 +1,24 @@
 import type { PublicPagePath } from "@/lib/i18n";
 
 type LithuanianContentStatus =
-  | "translated-unpublished"
+  | "translated-published"
   | "awaiting-approved-translation";
 
 export const lithuanianSharedContentStatus = {
-  siteChrome: "translated-unpublished",
-  notFound: "translated-unpublished",
+  siteChrome: "translated-published",
+  notFound: "translated-published",
 } as const satisfies Record<
   "siteChrome" | "notFound",
   LithuanianContentStatus
 >;
 
 export const lithuanianContentStatus = {
-  "/": "translated-unpublished",
-  "/heating": "translated-unpublished",
-  "/heat-pumps": "translated-unpublished",
-  "/plumbing": "translated-unpublished",
-  "/emergency-repairs": "translated-unpublished",
-  "/service-area": "translated-unpublished",
-  "/about": "translated-unpublished",
-  "/contact": "translated-unpublished",
+  "/": "translated-published",
+  "/heating": "translated-published",
+  "/heat-pumps": "translated-published",
+  "/plumbing": "translated-published",
+  "/emergency-repairs": "translated-published",
+  "/service-area": "translated-published",
+  "/about": "translated-published",
+  "/contact": "translated-published",
 } as const satisfies Record<PublicPagePath, LithuanianContentStatus>;

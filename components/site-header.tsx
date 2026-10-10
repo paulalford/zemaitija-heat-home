@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef, useState, type KeyboardEvent } from "react";
+import { Suspense, useRef, useState, type KeyboardEvent } from "react";
+import { ContactLanguageSwitcher } from "@/components/contact-language-switcher";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import type { Locale } from "@/lib/i18n";
 
 type HeaderContent = Readonly<{
   brand: Readonly<{
@@ -61,16 +64,21 @@ function NavigationLinks({
 
 export function SiteHeader({
   content,
+  locale,
   homeHref,
   navigationLinks,
 }: Readonly<{
   content: HeaderContent;
+  locale: Locale;
   homeHref: string;
   navigationLinks: readonly NavigationLink[];
 }>) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  const languageSwitcher = (
+    <LanguageSwitcher currentLocale={locale} pathname={pathname} />
+  );
 
   function closeOnEscape(event: KeyboardEvent<HTMLElement>) {
     if (event.key === "Escape" && isMenuOpen) {
@@ -95,7 +103,18 @@ export function SiteHeader({
           </span>
         </Link>
 
-        <button
+        <div className="header-actions">
+          {pathname.endsWith("/contact") ? (
+            <Suspense fallback={languageSwitcher}>
+              <ContactLanguageSwitcher
+                currentLocale={locale}
+                pathname={pathname}
+              />
+            </Suspense>
+          ) : (
+            languageSwitcher
+          )}
+          <button
           ref={menuButton}
           type="button"
           className="menu-toggle button"
@@ -132,14 +151,15 @@ export function SiteHeader({
               ? content.mobileNavigation.close
               : content.mobileNavigation.open}
           </span>
-        </button>
+          </button>
 
-        <nav
-          className="desktop-navigation"
-          aria-label={content.accessibility.mainNavigation}
-        >
-          <NavigationLinks pathname={pathname} links={navigationLinks} />
-        </nav>
+          <nav
+            className="desktop-navigation"
+            aria-label={content.accessibility.mainNavigation}
+          >
+            <NavigationLinks pathname={pathname} links={navigationLinks} />
+          </nav>
+        </div>
       </div>
 
       <nav

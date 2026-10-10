@@ -225,6 +225,24 @@
     display: none;
   }
 
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 20rem) {
+    .header-actions {
+      flex-direction: column-reverse;
+      align-items: flex-end;
+      gap: var(--space-1);
+    }
+
+    .language-switcher a {
+      min-height: 2rem;
+    }
+  }
+
   .menu-toggle {
     gap: var(--space-2);
     padding-inline: var(--space-3);
@@ -1907,7 +1925,10 @@
 
     .desktop-navigation {
       display: block;
-      justify-self: end;
+    }
+
+    .header-actions {
+      gap: var(--space-4);
     }
 
     .navigation-list {

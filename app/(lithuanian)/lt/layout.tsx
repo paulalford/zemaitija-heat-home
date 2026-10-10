@@ -1,22 +1,18 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { site } from "@/lib/site";
+import { SiteShell } from "@/components/site-shell";
+import { lithuanianSiteMetadata } from "@/content/lt/site-metadata";
 import "../../globals.css";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+export const metadata = lithuanianSiteMetadata;
 
 export default function LithuanianLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="lt">
-      <body>{children}</body>
+      <body>
+        <SiteShell locale="lt">{children}</SiteShell>
+      </body>
     </html>
   );
 }

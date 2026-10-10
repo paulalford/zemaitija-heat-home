@@ -8,14 +8,10 @@ export type Locale = (typeof supportedLocales)[number];
 
 export const defaultLocale: Locale = "lt";
 
-// The currently published, unprefixed site is English. Keep this separate from
-// defaultLocale until the translated route tree is ready to launch.
+// Legacy unprefixed deep links remain English for backward compatibility.
 export const legacyContentLocale: Locale = "en";
 
-// Add "lt" only after every Lithuanian route, shared label and metadata value
-// has an approved translation. Redirects and discovery use this publication
-// gate so incomplete locale content cannot be exposed accidentally.
-export const publishedLocales = ["en"] as const satisfies readonly Locale[];
+export const publishedLocales = ["lt", "en"] as const satisfies readonly Locale[];
 
 export function isPublishedLocale(locale: Locale) {
   return publishedLocales.some((publishedLocale) => publishedLocale === locale);

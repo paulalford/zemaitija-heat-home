@@ -211,14 +211,11 @@ export const lithuanianPlumbingContent = {
   },
 } as const satisfies PlumbingPageContent;
 
-// This metadata remains unreachable until the Lithuanian locale is published.
-// An empty availability list prevents premature hreflang output.
 export const metadata = createLocalizedPageMetadata({
   title: lithuanianPlumbingContent.metadata.title,
   description: lithuanianPlumbingContent.metadata.description,
   path: "/plumbing",
   locale: "lt",
-  availableLocales: [],
 });
 
 export default function LithuanianPlumbingPage() {

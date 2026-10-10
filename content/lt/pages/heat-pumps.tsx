@@ -220,14 +220,11 @@ export const lithuanianHeatPumpsContent = {
   },
 } as const satisfies HeatPumpsPageContent;
 
-// This metadata remains unreachable until the Lithuanian locale is published.
-// An empty availability list prevents premature hreflang output.
 export const metadata = createLocalizedPageMetadata({
   title: lithuanianHeatPumpsContent.metadata.title,
   description: lithuanianHeatPumpsContent.metadata.description,
   path: "/heat-pumps",
   locale: "lt",
-  availableLocales: [],
 });
 
 export default function LithuanianHeatPumpsPage() {
