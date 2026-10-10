@@ -12,9 +12,9 @@ export const lithuanianContentStatus = {
   "/": "translated-unpublished",
   "/heating": "translated-unpublished",
   "/heat-pumps": "translated-unpublished",
-  "/plumbing": "awaiting-approved-translation",
-  "/emergency-repairs": "awaiting-approved-translation",
-  "/service-area": "awaiting-approved-translation",
-  "/about": "awaiting-approved-translation",
+  "/plumbing": "translated-unpublished",
+  "/emergency-repairs": "translated-unpublished",
+  "/service-area": "translated-unpublished",
+  "/about": "translated-unpublished",
   "/contact": "awaiting-approved-translation",
 } as const satisfies Record<PublicPagePath, LithuanianContentStatus>;

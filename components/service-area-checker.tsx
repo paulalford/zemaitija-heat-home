@@ -1,23 +1,30 @@
 "use client";
 
-// A Lithuanian page can reuse the routing contract with translated UI copy.
-
 import Link from "next/link";
 import { useActionState, useState, type FormEvent } from "react";
+import { getLocalizedPath, type Locale } from "@/lib/i18n";
 import {
   normalizePropertyLocation,
   PROPERTY_LOCATION_MAX_LENGTH,
 } from "@/lib/property-location";
-import { getLocalizedPath, type Locale } from "@/lib/i18n";
 import {
   checkServiceAreaLocation,
   type LocationCheckState,
-} from "./actions";
+} from "@/lib/service-area-action";
 
-const emptyLocationMessage =
-  "Enter a town, village, postcode or property location.";
-const invalidLocationMessage =
-  "Use standard letters, numbers and address punctuation for the location.";
+export type ServiceAreaCheckerContent = Readonly<{
+  fieldLabel: string;
+  placeholder: string;
+  submitLabel: string;
+  loadingLabel: string;
+  fieldHint: string;
+  validation: Readonly<{
+    empty: string;
+    invalid: string;
+  }>;
+  enquiryLabel: string;
+  attribution: string;
+}>;
 
 const initialState: LocationCheckState = {
   status: "idle",
@@ -27,7 +34,13 @@ const initialState: LocationCheckState = {
   revision: 0,
 };
 
-export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
+export function ServiceAreaChecker({
+  content,
+  locale,
+}: Readonly<{
+  content: ServiceAreaCheckerContent;
+  locale: Locale;
+}>) {
   const [state, formAction, pending] = useActionState(
     checkServiceAreaLocation,
     initialState,
@@ -41,19 +54,21 @@ export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
       return;
     }
 
-    const location = normalizePropertyLocation(input.value);
+    const normalizedLocation = normalizePropertyLocation(input.value);
 
-    if (!location) {
+    if (!normalizedLocation) {
       event.preventDefault();
       input.setCustomValidity(
-        input.value.trim() ? invalidLocationMessage : emptyLocationMessage,
+        input.value.trim()
+          ? content.validation.invalid
+          : content.validation.empty,
       );
       input.reportValidity();
       return;
     }
 
     input.setCustomValidity("");
-    setLocation(location);
+    setLocation(normalizedLocation);
   }
 
   const currentLocation = normalizePropertyLocation(location);
@@ -62,9 +77,6 @@ export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
     state.status !== "idle" &&
     state.enteredLocation === currentLocation;
   const canEnquire = state.status === "within" || state.status === "outside";
-  const contactPath = locale
-    ? getLocalizedPath(locale, "/contact")
-    : "/contact";
 
   return (
     <div className="service-area-checker">
@@ -74,9 +86,8 @@ export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
         className="service-area-checker-form contact-field"
         aria-busy={pending}
       >
-        <label htmlFor="service-area-location">
-          Town, village or postcode
-        </label>
+        <input type="hidden" name="locale" value={locale} />
+        <label htmlFor="service-area-location">{content.fieldLabel}</label>
         <div className="service-area-checker-controls">
           <input
             id="service-area-location"
@@ -84,7 +95,7 @@ export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
             type="text"
             autoComplete="address-level2"
             maxLength={PROPERTY_LOCATION_MAX_LENGTH}
-            placeholder="Kuršėnai"
+            placeholder={content.placeholder}
             aria-describedby="service-area-location-hint"
             value={location}
             onChange={(event) => {
@@ -94,11 +105,11 @@ export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
             required
           />
           <button type="submit" className="button" disabled={pending}>
-            {pending ? "Checking location…" : "Check location"}
+            {pending ? content.loadingLabel : content.submitLabel}
           </button>
         </div>
         <p id="service-area-location-hint" className="contact-field-hint">
-          Enter the location you want to carry into the enquiry form.
+          {content.fieldHint}
         </p>
       </form>
 
@@ -110,12 +121,12 @@ export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
             {canEnquire && (
               <Link
                 href={{
-                  pathname: contactPath,
+                  pathname: getLocalizedPath(locale, "/contact"),
                   query: { location: state.enteredLocation },
                 }}
                 className="button"
               >
-                Enquire about this location
+                {content.enquiryLabel}
               </Link>
             )}
           </div>
@@ -124,7 +135,7 @@ export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
 
       <p className="service-area-checker-attribution">
         <a href="https://www.openstreetmap.org/copyright">
-          Location search © OpenStreetMap contributors
+          {content.attribution}
         </a>
       </p>
     </div>
