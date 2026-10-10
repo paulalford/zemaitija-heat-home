@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getSharedSiteContent } from "@/content/shared";
 import {
   getPreservedContactQuery,
   type ContactSearchParams,
@@ -24,15 +25,19 @@ export function LanguageSwitcher({
   pathname,
   searchParams = {},
   availableLocales = publishedLocales,
-  ariaLabel = "Language",
+  ariaLabel,
 }: LanguageSwitcherProps) {
+  const content = getSharedSiteContent(currentLocale);
   const pagePath = removeLocaleFromPath(pathname);
   const query =
     pagePath === "/contact" ? getPreservedContactQuery(searchParams) : {};
   const hasQuery = Object.keys(query).length > 0;
 
   return (
-    <nav className="language-switcher" aria-label={ariaLabel}>
+    <nav
+      className="language-switcher"
+      aria-label={ariaLabel ?? content.accessibility.languageSwitcher}
+    >
       <ul>
         {availableLocales.map((locale, index) => {
           const localizedPath = getLocalizedPath(locale, pagePath);

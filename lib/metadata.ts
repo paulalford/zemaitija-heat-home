@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { englishHomeContent } from "@/content/en/home";
 import {
   defaultLocale,
   getLocalizedPath,
@@ -13,8 +14,22 @@ const socialImage = {
   url: new URL("/en/opengraph-image", site.url).toString(),
   width: 1200,
   height: 630,
-  alt: `${site.name} — heating, heat pumps and plumbing around Šiauliai`,
+  alt: englishHomeContent.metadata.socialImageAlt,
 };
+
+type SocialImage = Readonly<{
+  path: string;
+  alt: string;
+}>;
+
+function createSocialImage({ path, alt }: SocialImage) {
+  return {
+    url: new URL(path, site.url).toString(),
+    width: 1200,
+    height: 630,
+    alt,
+  };
+}
 
 export function getPageTitle(title: string) {
   return `${title} | ${site.name}`;
@@ -60,15 +75,20 @@ export function createLocalizedPageMetadata({
   path,
   locale,
   availableLocales = publishedLocales,
+  socialImage: localizedSocialImage,
 }: Readonly<{
   title: string;
   description: string;
   path: PublicPagePath;
   locale: Locale;
   availableLocales?: readonly Locale[];
+  socialImage?: SocialImage;
 }>): Metadata {
   const fullTitle = getPageTitle(title);
   const canonical = getLocalizedPath(locale, path);
+  const resolvedSocialImage = localizedSocialImage
+    ? createSocialImage(localizedSocialImage)
+    : socialImage;
   const languages = Object.fromEntries(
     availableLocales.map((availableLocale) => [
       localeConfig[availableLocale].htmlLanguage,
@@ -101,13 +121,13 @@ export function createLocalizedPageMetadata({
       title: fullTitle,
       description,
       url: canonical,
-      images: [socialImage],
+      images: [resolvedSocialImage],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [socialImage],
+      images: [resolvedSocialImage],
     },
   };
 }

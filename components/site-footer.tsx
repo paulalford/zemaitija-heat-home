@@ -4,10 +4,15 @@ import {
   getNavigationLinks,
   type Locale,
 } from "@/lib/i18n";
-import { site } from "@/lib/site";
+import { getSharedSiteContent } from "@/content/shared";
 
 export function SiteFooter({ locale }: Readonly<{ locale: Locale }>) {
   const navigationLinks = getNavigationLinks(locale);
+  const content = getSharedSiteContent(locale);
+  const copyright = content.footer.copyright.replace(
+    "{year}",
+    new Date().getFullYear().toString(),
+  );
 
   return (
     <footer className="site-footer">
@@ -15,15 +20,15 @@ export function SiteFooter({ locale }: Readonly<{ locale: Locale }>) {
         <div className="footer-grid">
           <div className="footer-introduction">
             <Link href={getLocalizedPath(locale, "/")} className="footer-name">
-              {site.name}
+              {content.footer.businessName}
             </Link>
-            <p>Residential heating and plumbing.</p>
-            <p>{site.serviceArea}.</p>
+            <p>{content.footer.tagline}</p>
+            <p>{content.footer.serviceArea}</p>
           </div>
 
           <nav aria-labelledby="footer-main-heading">
             <h2 id="footer-main-heading" className="footer-heading">
-              Explore
+              {content.footer.exploreHeading}
             </h2>
             <ul className="footer-links">
               {navigationLinks
@@ -38,7 +43,7 @@ export function SiteFooter({ locale }: Readonly<{ locale: Locale }>) {
 
           <nav aria-labelledby="footer-services-heading">
             <h2 id="footer-services-heading" className="footer-heading">
-              Services
+              {content.footer.servicesHeading}
             </h2>
             <ul className="footer-links">
               {navigationLinks
@@ -53,8 +58,8 @@ export function SiteFooter({ locale }: Readonly<{ locale: Locale }>) {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} {site.name}.</p>
-          <p>{site.disclosure}</p>
+          <p>{copyright}</p>
+          <p>{content.footer.disclosure}</p>
         </div>
       </div>
     </footer>

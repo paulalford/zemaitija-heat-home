@@ -11,9 +11,11 @@ publication gate: `/lt` route modules exist, but return HTTP 404 and render no
 English fallback or placeholder copy. They are also excluded from navigation,
 language switching, metadata alternates and the sitemap.
 
-`content/lt/content-status.ts` records the translation status for every public
-page. Add approved Lithuanian page content, navigation and shared-interface
-labels before adding `lt` to `publishedLocales`.
+`content/lt/content-status.ts` records the translation status for shared site
+chrome and every public page. Batch 1 provides approved Lithuanian shared
+chrome and homepage content, both marked `translated-unpublished`. The other
+seven pages remain `awaiting-approved-translation`, so `lt` must not be added
+to `publishedLocales` yet.
 
 ## Route trees and document language
 
@@ -24,8 +26,12 @@ Route groups provide independent root layouts:
   root layout ready to use `lang="lt"` when translated pages are activated.
   Until then, its empty 404 responses declare `Content-Language: lt` and expose
   no page or interface copy.
+- `components/home-page.tsx` owns the locale-neutral homepage structure.
+  `content/en/home.ts` and `content/lt/home.ts` provide the approved locale
+  content without duplicating the rendered page layout.
 - `content/en/pages` contains the approved English page implementations used by
-  the locale route entries.
+  the locale route entries. The prepared Lithuanian homepage module remains
+  disconnected from the route tree while the locale is unpublished.
 
 English locale route files re-export those approved modules, so the content and
 interactive implementations have one source rather than duplicated copies or
@@ -44,8 +50,10 @@ to `/lt`, making Lithuanian the live default without another routing rewrite.
 
 ## Navigation and language switching
 
-Header and footer links are generated from the active locale. Lithuanian labels
-are intentionally absent, which prevents an untranslated shell from rendering.
+Header and footer links are generated from the active locale. Approved
+Lithuanian Batch 1 labels are stored separately under `content/lt`, but the
+Lithuanian shell is not mounted by any public page while the locale remains
+unpublished.
 
 `components/language-switcher.tsx` is a Server Component made from normal
 links. Its default choices come from `publishedLocales`, so it currently offers
@@ -70,8 +78,9 @@ enquiries directly to `/en/contact`; the future Lithuanian page will pass `lt`.
 ## Metadata and discovery
 
 English pages use locale-specific canonicals under `/en` and declare only the
-published English alternate. No metadata points to an incomplete Lithuanian
-page.
+published English alternate. Prepared Lithuanian homepage metadata and social
+image content are not connected to a public route, so no published metadata
+points to an incomplete Lithuanian page.
 
 `createLocalizedPageMetadata` emits canonical, Open Graph locale and language
 alternates from an explicit availability list. It adds `x-default` only when

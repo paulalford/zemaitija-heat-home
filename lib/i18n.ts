@@ -1,3 +1,7 @@
+import { englishNavigationLabels } from "../content/en/navigation";
+import { lithuanianNavigationLabels } from "../content/lt/navigation";
+import type { NavigationLabels } from "../content/shared-content";
+
 export const supportedLocales = ["lt", "en"] as const;
 
 export type Locale = (typeof supportedLocales)[number];
@@ -108,20 +112,10 @@ const navigationItems = [
   group: NavigationGroup;
 }[];
 
-// Add Lithuanian labels only when the approved translations are available.
-// Keeping this partial prevents untranslated navigation from being published.
 export const navigationLabels = {
-  en: {
-    home: "Home",
-    heating: "Heating",
-    heatPumps: "Heat Pumps",
-    plumbing: "Plumbing",
-    emergencyRepairs: "Emergency Repairs",
-    serviceArea: "Service Area",
-    about: "About",
-    contact: "Contact",
-  },
-} as const satisfies Partial<Record<Locale, Record<NavigationKey, string>>>;
+  en: englishNavigationLabels,
+  lt: lithuanianNavigationLabels,
+} as const satisfies Record<Locale, NavigationLabels>;
 
 export function hasNavigationLabels(
   locale: Locale,

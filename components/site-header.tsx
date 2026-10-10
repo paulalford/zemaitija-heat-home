@@ -3,12 +3,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState, type KeyboardEvent } from "react";
-import {
-  getLocalizedPath,
-  getNavigationLinks,
-  type Locale,
-} from "@/lib/i18n";
-import { site } from "@/lib/site";
+
+type HeaderContent = Readonly<{
+  brand: Readonly<{
+    primary: string;
+    secondary: string;
+  }>;
+  mobileNavigation: Readonly<{
+    open: string;
+    close: string;
+  }>;
+  accessibility: Readonly<{
+    homeLinkLabel: string;
+    openMainMenu: string;
+    closeMainMenu: string;
+    mainNavigation: string;
+  }>;
+}>;
+
+type NavigationLink = Readonly<{
+  href: string;
+  label: string;
+}>;
 
 function NavigationLinks({
   pathname,
@@ -17,7 +33,7 @@ function NavigationLinks({
   showHome = true,
 }: {
   pathname: string;
-  links: ReturnType<typeof getNavigationLinks>;
+  links: readonly NavigationLink[];
   onNavigate?: () => void;
   showHome?: boolean;
 }) {
@@ -43,9 +59,16 @@ function NavigationLinks({
   );
 }
 
-export function SiteHeader({ locale }: Readonly<{ locale: Locale }>) {
+export function SiteHeader({
+  content,
+  homeHref,
+  navigationLinks,
+}: Readonly<{
+  content: HeaderContent;
+  homeHref: string;
+  navigationLinks: readonly NavigationLink[];
+}>) {
   const pathname = usePathname();
-  const navigationLinks = getNavigationLinks(locale);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
 
@@ -61,20 +84,26 @@ export function SiteHeader({ locale }: Readonly<{ locale: Locale }>) {
     <header className="site-header" onKeyDown={closeOnEscape}>
       <div className="container header-inner">
         <Link
-          href={getLocalizedPath(locale, "/")}
+          href={homeHref}
           className="wordmark"
-          aria-label={`${site.name} — home`}
+          aria-label={content.accessibility.homeLinkLabel}
           onClick={() => setIsMenuOpen(false)}
         >
-          <span className="wordmark-name">Žemaitija</span>
-          <span className="wordmark-description">Heat &amp; Home</span>
+          <span className="wordmark-name">{content.brand.primary}</span>
+          <span className="wordmark-description">
+            {content.brand.secondary}
+          </span>
         </Link>
 
         <button
           ref={menuButton}
           type="button"
           className="menu-toggle button"
-          aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
+          aria-label={
+            isMenuOpen
+              ? content.accessibility.closeMainMenu
+              : content.accessibility.openMainMenu
+          }
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
@@ -98,10 +127,17 @@ export function SiteHeader({ locale }: Readonly<{ locale: Locale }>) {
               </>
             )}
           </svg>
-          <span>{isMenuOpen ? "Close" : "Menu"}</span>
+          <span>
+            {isMenuOpen
+              ? content.mobileNavigation.close
+              : content.mobileNavigation.open}
+          </span>
         </button>
 
-        <nav className="desktop-navigation" aria-label="Main navigation">
+        <nav
+          className="desktop-navigation"
+          aria-label={content.accessibility.mainNavigation}
+        >
           <NavigationLinks pathname={pathname} links={navigationLinks} />
         </nav>
       </div>
@@ -109,7 +145,7 @@ export function SiteHeader({ locale }: Readonly<{ locale: Locale }>) {
       <nav
         id="mobile-navigation"
         className="mobile-navigation"
-        aria-label="Main navigation"
+        aria-label={content.accessibility.mainNavigation}
         hidden={!isMenuOpen}
       >
         <div className="container">
