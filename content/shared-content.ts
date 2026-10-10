@@ -36,6 +36,10 @@ export type SharedSiteContent = Readonly<{
     mainNavigation: string;
     languageSwitcher: string;
   }>;
+  servicePage: Readonly<{
+    serviceCtaEyebrow: string;
+    viewAllServicesLabel: string;
+  }>;
   structuredData: Readonly<{
     description: string;
     areaServed: string;

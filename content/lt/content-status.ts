@@ -10,8 +10,8 @@ export const lithuanianSharedContentStatus = {
 
 export const lithuanianContentStatus = {
   "/": "translated-unpublished",
-  "/heating": "awaiting-approved-translation",
-  "/heat-pumps": "awaiting-approved-translation",
+  "/heating": "translated-unpublished",
+  "/heat-pumps": "translated-unpublished",
   "/plumbing": "awaiting-approved-translation",
   "/emergency-repairs": "awaiting-approved-translation",
   "/service-area": "awaiting-approved-translation",

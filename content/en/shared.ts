@@ -30,6 +30,10 @@ export const englishSharedContent = {
     mainNavigation: "Main navigation",
     languageSwitcher: "Language",
   },
+  servicePage: {
+    serviceCtaEyebrow: "Let’s discuss your home",
+    viewAllServicesLabel: "View all services",
+  },
   structuredData: {
     description: englishHomeContent.metadata.description,
     areaServed: "Šiauliai and the wider Žemaitija region of Lithuania",

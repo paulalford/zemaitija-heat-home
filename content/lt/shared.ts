@@ -30,6 +30,10 @@ export const lithuanianSharedContent = {
     mainNavigation: "Pagrindinė navigacija",
     languageSwitcher: "Kalba",
   },
+  servicePage: {
+    serviceCtaEyebrow: "Aptarkime jūsų namus",
+    viewAllServicesLabel: "Peržiūrėti visas paslaugas",
+  },
   structuredData: {
     description: lithuanianHomeContent.metadata.description,
     areaServed: "Šiauliai ir platesnis Žemaitijos regionas Lietuvoje",

@@ -85,12 +85,14 @@ export function ServiceSection({
 }
 
 export function ServiceCta({
+  eyebrow = "Let’s discuss your home",
   title,
   description,
   contactLabel,
   contactHref,
   locale = "en",
 }: Readonly<{
+  eyebrow?: string;
   title: string;
   description: string;
   contactLabel: string;
@@ -107,7 +109,7 @@ export function ServiceCta({
     >
       <div className="container service-split">
         <header className="service-section-heading">
-          <p className="eyebrow">Let’s discuss your home</p>
+          <p className="eyebrow">{eyebrow}</p>
           <h2 id="service-enquiry-heading">{title}</h2>
           <p>{description}</p>
         </header>
