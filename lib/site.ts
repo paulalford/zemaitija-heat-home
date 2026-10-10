@@ -1,8 +1,14 @@
+import {
+  getNavigationLinks,
+  legacyContentLocale,
+  localeConfig,
+} from "@/lib/i18n";
+
 export const site = {
   name: "Žemaitija Heat & Home",
   url: "https://zemaitija-heat-home.vercel.app",
-  language: "en",
-  locale: "en_GB",
+  language: localeConfig[legacyContentLocale].htmlLanguage,
+  locale: localeConfig[legacyContentLocale].openGraphLocale,
   description:
     "Residential heating, heat pump installation, plumbing and emergency repair services around Šiauliai and the wider Žemaitija region. A portfolio case study.",
   serviceArea: "Šiauliai and the wider Žemaitija region of Lithuania",
@@ -19,13 +25,6 @@ export const serviceCategories = [
   "Residential call-outs",
 ] as const;
 
-export const navigationLinks = [
-  { href: "/", label: "Home", group: "main" },
-  { href: "/heating", label: "Heating", group: "services" },
-  { href: "/heat-pumps", label: "Heat Pumps", group: "services" },
-  { href: "/plumbing", label: "Plumbing", group: "services" },
-  { href: "/emergency-repairs", label: "Emergency Repairs", group: "services" },
-  { href: "/service-area", label: "Service Area", group: "main" },
-  { href: "/about", label: "About", group: "main" },
-  { href: "/contact", label: "Contact", group: "main" },
-] as const;
+export const navigationLinks = getNavigationLinks(legacyContentLocale, {
+  localized: false,
+});

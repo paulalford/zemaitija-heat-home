@@ -1,19 +1,9 @@
 import type { MetadataRoute } from "next";
+import { publicPagePaths } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
-const publicPaths = [
-  "/",
-  "/heating",
-  "/heat-pumps",
-  "/plumbing",
-  "/emergency-repairs",
-  "/service-area",
-  "/about",
-  "/contact",
-] as const;
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  return publicPaths.map((path) => ({
+  return publicPagePaths.map((path) => ({
     url: new URL(path, site.url).toString(),
   }));
 }

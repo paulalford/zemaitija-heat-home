@@ -6,6 +6,7 @@ import {
   normalizePropertyLocation,
   PROPERTY_LOCATION_MAX_LENGTH,
 } from "@/lib/property-location";
+import { getLocalizedPath, type Locale } from "@/lib/i18n";
 import {
   checkServiceAreaLocation,
   type LocationCheckState,
@@ -24,7 +25,7 @@ const initialState: LocationCheckState = {
   revision: 0,
 };
 
-export function ServiceAreaChecker() {
+export function ServiceAreaChecker({ locale }: Readonly<{ locale?: Locale }>) {
   const [state, formAction, pending] = useActionState(
     checkServiceAreaLocation,
     initialState,
@@ -59,6 +60,9 @@ export function ServiceAreaChecker() {
     state.status !== "idle" &&
     state.enteredLocation === currentLocation;
   const canEnquire = state.status === "within" || state.status === "outside";
+  const contactPath = locale
+    ? getLocalizedPath(locale, "/contact")
+    : "/contact";
 
   return (
     <div className="service-area-checker">
@@ -104,7 +108,7 @@ export function ServiceAreaChecker() {
             {canEnquire && (
               <Link
                 href={{
-                  pathname: "/contact",
+                  pathname: contactPath,
                   query: { location: state.enteredLocation },
                 }}
                 className="button"

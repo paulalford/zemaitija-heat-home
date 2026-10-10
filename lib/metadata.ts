@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import {
+  defaultLocale,
+  getLocalizedPath,
+  localeConfig,
+  type Locale,
+  type PublicPagePath,
+} from "@/lib/i18n";
 import { site } from "@/lib/site";
 
 const socialImage = {
@@ -34,6 +41,63 @@ export function createPageMetadata({
       title: fullTitle,
       description,
       ...(path ? { url: path } : {}),
+      images: [socialImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description,
+      images: [socialImage],
+    },
+  };
+}
+
+export function createLocalizedPageMetadata({
+  title,
+  description,
+  path,
+  locale,
+  availableLocales = [locale],
+}: Readonly<{
+  title: string;
+  description: string;
+  path: PublicPagePath;
+  locale: Locale;
+  availableLocales?: readonly Locale[];
+}>): Metadata {
+  const fullTitle = getPageTitle(title);
+  const canonical = getLocalizedPath(locale, path);
+  const languages = Object.fromEntries(
+    availableLocales.map((availableLocale) => [
+      localeConfig[availableLocale].htmlLanguage,
+      getLocalizedPath(availableLocale, path),
+    ]),
+  );
+
+  if (availableLocales.includes(defaultLocale)) {
+    languages["x-default"] = getLocalizedPath(defaultLocale, path);
+  }
+
+  return {
+    title: { absolute: fullTitle },
+    description,
+    alternates: {
+      canonical,
+      languages,
+    },
+    openGraph: {
+      type: "website",
+      siteName: site.name,
+      locale: localeConfig[locale].openGraphLocale,
+      alternateLocale: availableLocales
+        .filter((availableLocale) => availableLocale !== locale)
+        .map(
+          (availableLocale) =>
+            localeConfig[availableLocale].openGraphLocale,
+        ),
+      title: fullTitle,
+      description,
+      url: canonical,
       images: [socialImage],
     },
     twitter: {

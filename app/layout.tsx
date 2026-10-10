@@ -51,7 +51,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang={site.language}>
       <body>
         <script
           type="application/ld+json"

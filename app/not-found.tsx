@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { NotFoundPage } from "@/components/not-found-page";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = {
@@ -24,36 +24,15 @@ const mainPages = [
 
 export default function NotFound() {
   return (
-    <section className="service-hero" aria-labelledby="not-found-heading">
-      <div className="container service-split">
-        <div className="page-introduction">
-          <p className="eyebrow">Page not found</p>
-          <h1 id="not-found-heading">We couldn&apos;t find that page.</h1>
-          <p className="page-description">
-            The page may have moved or the address may be incorrect. You can
-            return home or continue to one of our main services.
-          </p>
-          <div className="service-actions">
-            <Link href="/" className="button">
-              Return home
-            </Link>
-          </div>
-        </div>
-
-        <nav className="service-note" aria-labelledby="not-found-links-heading">
-          <p className="eyebrow">Main pages</p>
-          <h2 id="not-found-links-heading">Continue browsing</h2>
-          <div className="service-actions">
-            <ul className="footer-links">
-              {mainPages.map(({ href, label }) => (
-                <li key={href}>
-                  <Link href={href}>{label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </section>
+    <NotFoundPage
+      eyebrow="Page not found"
+      title="We couldn't find that page."
+      description="The page may have moved or the address may be incorrect. You can return home or continue to one of our main services."
+      homeHref="/"
+      homeLabel="Return home"
+      navigationLabel="Main pages"
+      navigationHeading="Continue browsing"
+      links={mainPages}
+    />
   );
 }

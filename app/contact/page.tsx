@@ -1,35 +1,15 @@
 import Link from "next/link";
 import { ServiceProcess } from "@/components/service-process";
+import {
+  getContactFormPrefill,
+  type ContactSearchParams,
+} from "@/lib/contact-query";
 import { createPageMetadata } from "@/lib/metadata";
-import { normalizePropertyLocation } from "@/lib/property-location";
 import { ContactForm } from "./contact-form";
 
 const title = "Contact for Heating & Plumbing in Šiauliai";
 const description =
   "Send a heating, heat pump, plumbing or emergency repair enquiry for a property around Šiauliai and the wider Žemaitija region. A portfolio case study.";
-
-const serviceQueryValues = new Map([
-  ["heating", "heating"],
-  ["heat-pumps", "heat-pumps"],
-  ["plumbing", "plumbing"],
-  ["emergency-repairs", "emergency-repairs"],
-]);
-
-const enquiryQueryValues = new Map([
-  ["planned", "planned-work"],
-  ["repair", "repair"],
-  ["urgent", "urgent-problem"],
-  ["not-sure", "not-sure"],
-]);
-
-type ContactSearchParams = Record<string, string | string[] | undefined>;
-
-function getInitialValue(
-  value: string | string[] | undefined,
-  supportedValues: ReadonlyMap<string, string>,
-) {
-  return typeof value === "string" ? (supportedValues.get(value) ?? "") : "";
-}
 
 export const metadata = createPageMetadata({
   title,
@@ -64,12 +44,11 @@ export default async function ContactPage({
   searchParams,
 }: Readonly<{ searchParams: Promise<ContactSearchParams> }>) {
   const query = await searchParams;
-  const initialService = getInitialValue(query.service, serviceQueryValues);
-  const initialEnquiryType = getInitialValue(
-    query.enquiry,
-    enquiryQueryValues,
-  );
-  const initialPropertyLocation = normalizePropertyLocation(query.location);
+  const {
+    service: initialService,
+    enquiryType: initialEnquiryType,
+    propertyLocation: initialPropertyLocation,
+  } = getContactFormPrefill(query);
 
   return (
     <>
