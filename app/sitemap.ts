@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { publicPagePaths } from "@/lib/i18n";
-import { site } from "@/lib/site";
+import { publicPagePaths, publishedLocales } from "@/lib/i18n";
+import { createLocalizedSitemap } from "@/lib/sitemap";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return publicPagePaths.map((path) => ({
-    url: new URL(path, site.url).toString(),
-  }));
+  return createLocalizedSitemap(
+    publicPagePaths.map((path) => ({ path, locales: publishedLocales })),
+  );
 }

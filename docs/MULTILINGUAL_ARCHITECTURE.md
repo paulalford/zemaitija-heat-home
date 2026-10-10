@@ -1,72 +1,87 @@
 # Multilingual architecture
 
-The current public site remains English on its original, unprefixed URLs. The
-locale foundation is deliberately dormant so untranslated Lithuanian pages and
-language links are not exposed.
+The App Router has separate locale trees for English and Lithuanian without an
+internationalisation dependency.
 
-## Locale and route foundation
+## Publication state
 
-`lib/i18n.ts` defines `lt` and `en`, with Lithuanian as the eventual default.
-It also owns public page paths, locale validation, prefix generation and the
-navigation item/label structure. Only approved English navigation labels exist
-at this stage; requesting Lithuanian navigation labels fails rather than
-silently falling back to English.
+`lib/i18n.ts` defines `lt` and `en`, with Lithuanian as the intended default.
+Its `publishedLocales` list currently contains only `en`. This is a deliberate
+publication gate: `/lt` route modules exist, but return HTTP 404 and render no
+English fallback or placeholder copy. They are also excluded from navigation,
+language switching, metadata alternates and the sitemap.
 
-When translations are ready, move the public page tree into an `app/[locale]`
-dynamic segment. At the cutover, move the document layout into that segment as
-its root layout so it receives the locale and can set `<html lang>` correctly;
-do not merely nest it below today's root document layout. The locale layout
-should:
+`content/lt/content-status.ts` records the translation status for every public
+page. Add approved Lithuanian page content, navigation and shared-interface
+labels before adding `lt` to `publishedLocales`.
 
-1. validates `params.locale` and calls `notFound()` for unsupported values;
-2. set the document language for the locale;
-3. renders locale-specific header, footer and page content;
-4. uses `generateStaticParams()` for `lt` and `en`;
-5. passes the active locale to locale-aware shared components.
+## Route trees and document language
 
-Do not add that route segment page-by-page. Publish each equivalent route only
-when its content, navigation and metadata are complete. At launch, decide and
-document redirects from the current English URLs (framework redirects can keep
-those redirects outside the localized page tree). Lithuanian can then become
-the default customer-facing destination without silently changing today's URLs
-during this foundation stage.
+Route groups provide independent root layouts:
+
+- `app/(english)/en` renders the published English site with `lang="en"`.
+- `app/(lithuanian)/lt` owns the complete Lithuanian route structure and has a
+  root layout ready to use `lang="lt"` when translated pages are activated.
+  Until then, its empty 404 responses declare `Content-Language: lt` and expose
+  no page or interface copy.
+- `content/en/pages` contains the approved English page implementations used by
+  the locale route entries.
+
+English locale route files re-export those approved modules, so the content and
+interactive implementations have one source rather than duplicated copies or
+legacy page builds. All English internal navigation points directly to `/en`.
+
+## Legacy redirects and the default locale
+
+Legacy English deep links redirect permanently to their `/en` equivalents.
+Next.js preserves query strings on these path-only redirects, including Contact
+context.
+
+The root redirect is controlled by `publishedLocales`. It currently targets
+`/en` so the public homepage remains usable while `/lt` has no approved content.
+As soon as `lt` is published, the same configuration automatically changes `/`
+to `/lt`, making Lithuanian the live default without another routing rewrite.
 
 ## Navigation and language switching
 
-`components/language-switcher.tsx` is a Server Component made only from normal
-links. It maps the current route to the same path under another locale. It is
-not rendered by the current layout because `/lt` and `/en` pages do not yet
-exist.
+Header and footer links are generated from the active locale. Lithuanian labels
+are intentionally absent, which prevents an untranslated shell from rendering.
+
+`components/language-switcher.tsx` is a Server Component made from normal
+links. Its default choices come from `publishedLocales`, so it currently offers
+only English and remains unmounted. Once Lithuanian content is published, it can
+show `LT | EN`, map to the equivalent page and indicate the active language with
+`aria-current`.
 
 On Contact, the switcher carries only validated `service`, `enquiry` and
-`location` query parameters. `lib/contact-query.ts` is shared by the current
-Contact page and the future switcher, so the existing form-prefill contract is
-also the locale-route contract.
+`location` parameters. `lib/contact-query.ts` is also used by the Contact page,
+keeping the preselection contract identical between locales.
 
-The service-area checker accepts an optional locale and uses it to build the
-Contact destination. The current page omits that prop and therefore retains
-its existing `/contact?location=...` behaviour. A future localized page should
-render `<ServiceAreaChecker locale={locale} />`.
+## Contact and service area
+
+The English Contact route retains contextual form preselection. A translated
+Lithuanian Contact page should use the same query parser and stable parameter
+values.
+
+The service-area checker keeps its server action, Nominatim lookup, Haversine
+calculation and OpenStreetMap attribution. Its locale prop now sends English
+enquiries directly to `/en/contact`; the future Lithuanian page will pass `lt`.
 
 ## Metadata and discovery
 
-Existing pages continue to use `createPageMetadata`, preserving their current
-canonical URLs and English Open Graph locale. Future locale pages should use
-`createLocalizedPageMetadata`. Its `availableLocales` argument must include
-only translations that actually exist for that page. Canonical, `hreflang`
-and Open Graph locale values are then generated from the same route config.
-`x-default` is emitted only when the default Lithuanian version is in that
-explicit availability list.
+English pages use locale-specific canonicals under `/en` and declare only the
+published English alternate. No metadata points to an incomplete Lithuanian
+page.
 
-The current sitemap intentionally lists only the published unprefixed English
-URLs. `createLocalizedSitemap` supports per-route locale availability and adds
-alternates only for the versions declared to exist. Replace the legacy sitemap
-mapping only when prefixed routes are published. `robots.ts` needs no route
-change; it will continue to advertise the single sitemap URL.
+`createLocalizedPageMetadata` emits canonical, Open Graph locale and language
+alternates from an explicit availability list. It adds `x-default` only when
+the default Lithuanian version exists. The sitemap follows the same per-route
+availability model and currently contains only `/en` URLs. Publishing `lt` for
+a route adds both locale URLs, their alternates and Lithuanian `x-default`.
 
 ## Not-found handling
 
-`components/not-found-page.tsx` keeps the presentation shared while accepting
-its copy and navigation as props. The current root not-found file supplies the
-existing English values. Future locale not-found files can reuse the component
-with translated copy and localized links, without duplicating the layout.
+English routes reuse the shared English not-found presentation. The dormant
+Lithuanian tree has its own no-content 404 boundary, preventing English fallback
+copy under `/lt`. Approved Lithuanian 404 copy and localized navigation should
+replace that boundary when Lithuanian is activated.

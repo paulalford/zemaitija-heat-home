@@ -3,28 +3,35 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState, type KeyboardEvent } from "react";
-import { navigationLinks, site } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getNavigationLinks,
+  type Locale,
+} from "@/lib/i18n";
+import { site } from "@/lib/site";
 
 function NavigationLinks({
   pathname,
+  links,
   onNavigate,
   showHome = true,
 }: {
   pathname: string;
+  links: ReturnType<typeof getNavigationLinks>;
   onNavigate?: () => void;
   showHome?: boolean;
 }) {
-  const links = showHome
-    ? navigationLinks
-    : navigationLinks.filter(({ href }) => href !== "/");
+  const visibleLinks = showHome ? links : links.slice(1);
 
   return (
     <ul className="navigation-list">
-      {links.map(({ href, label }) => (
+      {visibleLinks.map(({ href, label }) => (
         <li key={href}>
           <Link
             href={href}
-            className={href === "/contact" ? "button" : "navigation-link"}
+            className={
+              href.endsWith("/contact") ? "button" : "navigation-link"
+            }
             aria-current={pathname === href ? "page" : undefined}
             onClick={onNavigate}
           >
@@ -36,8 +43,9 @@ function NavigationLinks({
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ locale }: Readonly<{ locale: Locale }>) {
   const pathname = usePathname();
+  const navigationLinks = getNavigationLinks(locale);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
 
@@ -53,7 +61,7 @@ export function SiteHeader() {
     <header className="site-header" onKeyDown={closeOnEscape}>
       <div className="container header-inner">
         <Link
-          href="/"
+          href={getLocalizedPath(locale, "/")}
           className="wordmark"
           aria-label={`${site.name} — home`}
           onClick={() => setIsMenuOpen(false)}
@@ -94,7 +102,7 @@ export function SiteHeader() {
         </button>
 
         <nav className="desktop-navigation" aria-label="Main navigation">
-          <NavigationLinks pathname={pathname} />
+          <NavigationLinks pathname={pathname} links={navigationLinks} />
         </nav>
       </div>
 
@@ -107,6 +115,7 @@ export function SiteHeader() {
         <div className="container">
           <NavigationLinks
             pathname={pathname}
+            links={navigationLinks}
             onNavigate={() => setIsMenuOpen(false)}
             showHome={false}
           />

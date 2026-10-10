@@ -8,6 +8,15 @@ export const defaultLocale: Locale = "lt";
 // defaultLocale until the translated route tree is ready to launch.
 export const legacyContentLocale: Locale = "en";
 
+// Add "lt" only after every Lithuanian route, shared label and metadata value
+// has an approved translation. Redirects and discovery use this publication
+// gate so incomplete locale content cannot be exposed accidentally.
+export const publishedLocales = ["en"] as const satisfies readonly Locale[];
+
+export function isPublishedLocale(locale: Locale) {
+  return publishedLocales.some((publishedLocale) => publishedLocale === locale);
+}
+
 export const localeConfig = {
   lt: {
     htmlLanguage: "lt",

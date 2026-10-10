@@ -6,8 +6,8 @@ import {
 import {
   getLocalizedPath,
   localeConfig,
+  publishedLocales,
   removeLocaleFromPath,
-  supportedLocales,
   type Locale,
 } from "@/lib/i18n";
 
@@ -16,13 +16,15 @@ type LanguageSwitcherProps = Readonly<{
   pathname: string;
   searchParams?: ContactSearchParams;
   availableLocales?: readonly Locale[];
+  ariaLabel?: string;
 }>;
 
 export function LanguageSwitcher({
   currentLocale,
   pathname,
   searchParams = {},
-  availableLocales = supportedLocales,
+  availableLocales = publishedLocales,
+  ariaLabel = "Language",
 }: LanguageSwitcherProps) {
   const pagePath = removeLocaleFromPath(pathname);
   const query =
@@ -30,9 +32,9 @@ export function LanguageSwitcher({
   const hasQuery = Object.keys(query).length > 0;
 
   return (
-    <nav className="language-switcher" aria-label="Language">
+    <nav className="language-switcher" aria-label={ariaLabel}>
       <ul>
-        {availableLocales.map((locale) => {
+        {availableLocales.map((locale, index) => {
           const localizedPath = getLocalizedPath(locale, pagePath);
           const href = hasQuery
             ? { pathname: localizedPath, query }
@@ -40,6 +42,11 @@ export function LanguageSwitcher({
 
           return (
             <li key={locale}>
+              {index > 0 && (
+                <span className="language-switcher-separator" aria-hidden="true">
+                  |
+                </span>
+              )}
               <Link
                 href={href}
                 hrefLang={localeConfig[locale].htmlLanguage}

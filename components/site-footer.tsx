@@ -1,13 +1,20 @@
 import Link from "next/link";
-import { navigationLinks, site } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getNavigationLinks,
+  type Locale,
+} from "@/lib/i18n";
+import { site } from "@/lib/site";
 
-export function SiteFooter() {
+export function SiteFooter({ locale }: Readonly<{ locale: Locale }>) {
+  const navigationLinks = getNavigationLinks(locale);
+
   return (
     <footer className="site-footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-introduction">
-            <Link href="/" className="footer-name">
+            <Link href={getLocalizedPath(locale, "/")} className="footer-name">
               {site.name}
             </Link>
             <p>Residential heating and plumbing.</p>

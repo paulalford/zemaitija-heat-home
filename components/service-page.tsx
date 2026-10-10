@@ -1,14 +1,16 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 export function ServiceHero({
   eyebrow,
   title,
   description,
   contactLabel,
-  contactHref = "/contact",
-  secondaryHref = "/#services",
+  contactHref,
+  secondaryHref,
   secondaryLabel = "View all services",
+  locale = "en",
 }: Readonly<{
   eyebrow: string;
   title: string;
@@ -17,7 +19,13 @@ export function ServiceHero({
   contactHref?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
+  locale?: Locale;
 }>) {
+  const resolvedContactHref =
+    contactHref ?? getLocalizedPath(locale, "/contact");
+  const resolvedSecondaryHref =
+    secondaryHref ?? `${getLocalizedPath(locale, "/")}#services`;
+
   return (
     <section className="service-hero" aria-labelledby="service-hero-heading">
       <div className="container">
@@ -26,10 +34,10 @@ export function ServiceHero({
           <h1 id="service-hero-heading">{title}</h1>
           <p className="page-description">{description}</p>
           <div className="service-actions">
-            <Link href={contactHref} className="button">
+            <Link href={resolvedContactHref} className="button">
               {contactLabel}
             </Link>
-            <Link href={secondaryHref} className="button button-secondary">
+            <Link href={resolvedSecondaryHref} className="button button-secondary">
               {secondaryLabel}
             </Link>
           </div>
@@ -80,13 +88,18 @@ export function ServiceCta({
   title,
   description,
   contactLabel,
-  contactHref = "/contact",
+  contactHref,
+  locale = "en",
 }: Readonly<{
   title: string;
   description: string;
   contactLabel: string;
   contactHref?: string;
+  locale?: Locale;
 }>) {
+  const resolvedContactHref =
+    contactHref ?? getLocalizedPath(locale, "/contact");
+
   return (
     <section
       className="service-section service-enquiry"
@@ -99,7 +112,7 @@ export function ServiceCta({
           <p>{description}</p>
         </header>
         <div className="enquiry-actions">
-          <Link href={contactHref} className="button">
+          <Link href={resolvedContactHref} className="button">
             {contactLabel}
           </Link>
         </div>

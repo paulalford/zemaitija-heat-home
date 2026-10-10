@@ -1,5 +1,4 @@
 import {
-  getNavigationLinks,
   legacyContentLocale,
   localeConfig,
 } from "@/lib/i18n";
@@ -24,7 +23,3 @@ export const serviceCategories = [
   "Emergency repairs",
   "Residential call-outs",
 ] as const;
-
-export const navigationLinks = getNavigationLinks(legacyContentLocale, {
-  localized: false,
-});

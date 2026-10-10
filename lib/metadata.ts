@@ -3,13 +3,14 @@ import {
   defaultLocale,
   getLocalizedPath,
   localeConfig,
+  publishedLocales,
   type Locale,
   type PublicPagePath,
 } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
 const socialImage = {
-  url: "/opengraph-image",
+  url: new URL("/en/opengraph-image", site.url).toString(),
   width: 1200,
   height: 630,
   alt: `${site.name} — heating, heat pumps and plumbing around Šiauliai`,
@@ -31,6 +32,7 @@ export function createPageMetadata({
   const fullTitle = getPageTitle(title);
 
   return {
+    metadataBase: new URL(site.url),
     title: { absolute: fullTitle },
     description,
     ...(path ? { alternates: { canonical: path } } : {}),
@@ -57,7 +59,7 @@ export function createLocalizedPageMetadata({
   description,
   path,
   locale,
-  availableLocales = [locale],
+  availableLocales = publishedLocales,
 }: Readonly<{
   title: string;
   description: string;
@@ -79,6 +81,7 @@ export function createLocalizedPageMetadata({
   }
 
   return {
+    metadataBase: new URL(site.url),
     title: { absolute: fullTitle },
     description,
     alternates: {
