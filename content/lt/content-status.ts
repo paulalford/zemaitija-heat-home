@@ -6,7 +6,11 @@ type LithuanianContentStatus =
 
 export const lithuanianSharedContentStatus = {
   siteChrome: "translated-unpublished",
-} as const satisfies Record<"siteChrome", LithuanianContentStatus>;
+  notFound: "translated-unpublished",
+} as const satisfies Record<
+  "siteChrome" | "notFound",
+  LithuanianContentStatus
+>;
 
 export const lithuanianContentStatus = {
   "/": "translated-unpublished",
@@ -16,5 +20,5 @@ export const lithuanianContentStatus = {
   "/emergency-repairs": "translated-unpublished",
   "/service-area": "translated-unpublished",
   "/about": "translated-unpublished",
-  "/contact": "awaiting-approved-translation",
+  "/contact": "translated-unpublished",
 } as const satisfies Record<PublicPagePath, LithuanianContentStatus>;

@@ -1,22 +1,23 @@
 import { ContactPage } from "@/components/contact-page";
-import { englishContactContent } from "@/content/en/contact";
+import { lithuanianContactContent } from "@/content/lt/contact";
 import type { ContactSearchParams } from "@/lib/contact-query";
 import { createLocalizedPageMetadata } from "@/lib/metadata";
 
 export const metadata = createLocalizedPageMetadata({
-  title: englishContactContent.metadata.title,
-  description: englishContactContent.metadata.description,
+  title: lithuanianContactContent.metadata.title,
+  description: lithuanianContactContent.metadata.description,
   path: "/contact",
-  locale: "en",
+  locale: "lt",
+  availableLocales: [],
 });
 
-export default function EnglishContactPage({
+export default function LithuanianContactPage({
   searchParams,
 }: Readonly<{ searchParams: Promise<ContactSearchParams> }>) {
   return (
     <ContactPage
-      content={englishContactContent}
-      locale="en"
+      content={lithuanianContactContent}
+      locale="lt"
       searchParams={searchParams}
     />
   );
